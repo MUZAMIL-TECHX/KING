@@ -35,25 +35,25 @@ const config = {
     AUTO_LIKE_EMOJI: ['💋', '😶', '✨️', '💗', '🎈', '🎉', '🥳', '❤️', '🧫', '🐭'],
     PREFIX: '.',
     MAX_RETRIES: 3,
-    IMAGE_PATH: 'files.catbox.moe/w54zcn.jpg',
-    GROUP_INVITE_LINK: 'https://chat.whatsapp.com/JP325zr6ZVG2j6QuXgkY2I?mode=wwt',
+    IMAGE_PATH: 'https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg',
+    GROUP_INVITE_LINK: 'https://chat.whatsapp.com/C4ynk2v10WXDeL67ahhJLj?s=cl&p=a&ilr=1',
     ADMIN_LIST_PATH: './admin.json',
-    RCD_IMAGE_PATH: 'https://files.catbox.moe/w54zcn.jpg',
-    NEWSLETTER_JID: '120363397722863547@newsletter',
+    RCD_IMAGE_PATH: 'https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg',
+    NEWSLETTER_JID: '120363426106687970@newsletter',
     NEWSLETTER_MESSAGE_ID: '428',
     OTP_EXPIRY: 300000,
     version: '1.0.0',
-    OWNER_NUMBER: '50944735182',
-    BOT_FOOTER: '> ᴍᴀᴅᴇ ɪɴ ʙʏ kirah',
-    CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbAsZB29MF9AGWXOy01F'
+    OWNER_NUMBER: '923183928892',
+    BOT_FOOTER: '> ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ ᴋʜᴀɴ',
+    CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbCkm3rAe5VzCYLtNb2u'
 };
 
 let octokit;
 if (process.env.GITHUB_TOKEN) {
     octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 }
-const owner = process.env.GITHUB_REPO_OWNER || 'Kimy2011';
-const repo = process.env.GITHUB_REPO_NAME || 'MINI-KIRAH-XD';
+const owner = process.env.GITHUB_REPO_OWNER || 'MUZAMIL-TECHX';
+const repo = process.env.GITHUB_REPO_NAME || 'MUZAMILXDMINI';
 
 const activeSockets = new Map();
 const socketCreationTime = new Map();
@@ -345,7 +345,7 @@ async function handleMessageRevocation(socket, number) {
         const message = formatMessage(
             '🗑️ MESSAGE DELETED',
             `A message was deleted from your chat.\n📋 From: ${messageKey.remoteJid}\n🍁 Deletion Time: ${deletionTime}`,
-            'ᴍᴀᴅᴇ ɪɴ ʙʏ kirah'
+            'ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ-xᴅ'
         );
 
         try {
@@ -518,7 +518,7 @@ function setupCommandHandlers(socket, number) {
             },
             message: {
                 contactMessage: {
-                    displayName: "© ᴍɪɴɪ ɪɴᴄᴏɴɴᴜ xᴅ ✅",
+                    displayName: "© ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴄᴏɴɴᴇᴄᴛᴇᴅ ✅",
                     vcard: `BEGIN:VCARD\nVERSION:3.0\nFN:Meta\nORG:META AI;\nTEL;type=CELL;type=VOICE;waid=254101022551:+254101022551\nEND:VCARD`
                 }
             }
@@ -544,11 +544,11 @@ function setupCommandHandlers(socket, number) {
 │ ᴠᴇʀsɪᴏɴ: ${config.version}
 │ ᴍᴇᴍᴏʀʏ ᴜsᴀɢᴇ: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}ᴍʙ
 ╰───────────────⭓
-  > *▫️MINI KIRAH XD*
+  > *𝗠𝗨𝗭𝗔𝗠𝗜𝗟-𝗫𝗗 𝗠𝗜𝗡𝗜*
   > ʀᴇsᴘᴏɴᴅ ᴛɪᴍᴇ: ${Date.now() - msg.messageTimestamp * 1000}ms
 `;
         const aliveMessage = {
-            image: { url: "https://files.catbox.moe/w54zcn.jpg" },
+            image: { url: "https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg" },
             caption: `> ᴀᴍ ᴀʟɪᴠᴇ ɴn ᴋɪᴄᴋɪɴɢ 👾\n\n${captionText}`,
             buttons: [
                 {
@@ -561,7 +561,7 @@ function setupCommandHandlers(socket, number) {
                             title: 'ᴄʟɪᴄᴋ ʜᴇʀᴇ ❏',
                             sections: [
                                 {
-                                    title: `© MINI KIRAH XD`,
+                                    title: `© MUZAMIL-XD`,
                                     highlight_label: 'Quick Actions',
                                     rows: [
                                         { title: '📋 ғᴜʟʟ ᴍᴇɴᴜ', description: 'ᴠɪᴇᴡ ᴀʟʟ ᴀᴠᴀɪʟᴀʙʟᴇ ᴄᴍᴅs', id: `${config.PREFIX}menu` },
@@ -599,8 +599,8 @@ function setupCommandHandlers(socket, number) {
         const seconds = Math.floor(uptime % 60);
 
         await socket.sendMessage(m.chat, {
-            image: { url: "https://files.catbox.moe/w54zcn.jpg" },
-            caption: `*MINI KIRAH ALIVE*\n\n` +
+            image: { url: "https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg" },
+            caption: `*MUZAMIL-XD ALIVE*\n\n` +
                     `╭───────────────⭓\n` +
                     `│\n` +
                     `│ ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s\n` +
@@ -640,14 +640,14 @@ function setupCommandHandlers(socket, number) {
             forwardingScore: 1,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363404774234361@newsletter',
-                newsletterName: 'ᴍᴀᴅᴇ ɪɴ ʙʏ kirah',
+                newsletterJid: '120363426106687970@newsletter',
+                newsletterName: 'ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ-xᴅ',
                 serverMessageId: -1
             }
         };
 
         await socket.sendMessage(from, {
-            image: { url: "https://files.catbox.moe/w54zcn.jpg" },
+            image: { url: "https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg" },
             caption: captionText
         }, { 
             quoted: m,
@@ -668,11 +668,11 @@ case 'bot_info': {
         const from = m.key.remoteJid;
         const captionText = `
 ╭───────────────⭓
-│ ɴᴀᴍᴇ: ᴍɪɴɪ kirah xᴅ
-│ ᴄʀᴇᴀᴛᴏʀ: Mrs_Kirah 
+│ ɴᴀᴍᴇ: ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴠ2
+│ ᴄʀᴇᴀᴛᴏʀ: ᴍᴜᴢᴀᴍɪʟ ᴋʜᴀɴ
 │ ᴠᴇʀsɪᴏɴ: ${config.version}
 │ ᴘʀᴇғɪx: ${config.PREFIX}
-│ ᴅᴇsᴄ: ʏᴏᴜʀ sᴘɪᴄʏ ᴡʜᴀᴛsᴀᴘᴘ ᴄᴏᴍᴘᴀɴɪᴏɴ
+│ ᴅᴇsᴄ: ғᴜᴄᴋ ʀᴏᴏᴛᴇᴅ sʏsᴛᴇᴍ !
 ╰───────────────⭓`;
         
         // Common message context
@@ -680,14 +680,14 @@ case 'bot_info': {
             forwardingScore: 1,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363404774234361@newsletter',
-                newsletterName: 'ᴍᴀᴅᴇ ɪɴ ʙʏ kirah',
+                newsletterJid: '120363426106687970@newsletter',
+                newsletterName: 'ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ ᴋʜᴀɴ',
                 serverMessageId: -1
             }
         };
         
         await socket.sendMessage(from, {
-            image: { url: "https://files.catbox.moe/w54zcn.jpg" },
+            image: { url: "https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg" },
             caption: captionText
         }, { quoted: m });
     } catch (error) {
@@ -697,9 +697,8 @@ case 'bot_info': {
     }
     break;
 }
-                // Case: menu
-          // Case: menu
-case 'menu': {
+           
+  case 'menu': {
   try {
     await socket.sendMessage(sender, { react: { text: '🤖', key: msg.key } });
     const startTime = socketCreationTime.get(number) || Date.now();
@@ -711,16 +710,101 @@ case 'menu': {
     const totalMemory = Math.round(os.totalmem() / 1024 / 1024);
     
     let menuText = ` 
-╭───────────────⭓
-│ ʙᴏᴛ : ᴍɪɴɪ kirah xᴅ
-│ ᴜsᴇʀ: @${sender.split("@")[0]}
-│ ᴘʀᴇғɪx: ${config.PREFIX}
-│ ᴍᴇᴍᴏʀʏ : ${usedMemory}MB/${totalMemory}ᴍʙ
-│ ᴅᴇᴠ : Mrs_Kirah 
-╰───────────────⭓
-*Ξ sᴇʟᴇᴄᴛ ᴀ ᴄᴀᴛᴇɢᴏʀʏ ʙᴇʟᴏᴡ:*
+✨ *╔══════════════════════╗* ✨
+    *🤖 ᴍᴜᴢᴀᴍɪʟ-xᴅ ʙᴏᴛ* 🤖
+✨ *╚══════════════════════╝* ✨
 
-> ᴍᴀᴅᴇ ɪɴ ʙʏ Mrs_Kirah 
+👤 *ᴜsᴇʀ:* @${sender.split("@")[0]}
+⚡ *ᴘʀᴇғɪx:* \`${config.PREFIX}\`
+💾 *ᴍᴇᴍᴏʀʏ:* ${usedMemory}MB/${totalMemory}MB
+🕐 *ᴜᴘᴛɪᴍᴇ:* ${hours}h ${minutes}m ${seconds}s
+👨‍💻 *ᴅᴇᴠ:* ᴍᴜᴢᴀᴍɪʟ ᴋʜᴀɴ
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+📚 *ᴄᴏᴍᴍᴀɴᴅ ᴄᴀᴛᴇɢᴏʀɪᴇs* 📚
+
+🌐 *ɢᴇɴᴇʀᴀʟ ᴄᴏᴍᴍᴀɴᴅs*
+┌──────────────────────
+│ 🟢 \`${config.PREFIX}alive\` - ᴄʜᴇᴄᴋ ʙᴏᴛ sᴛᴀᴛᴜs
+│ 📊 \`${config.PREFIX}bot_stats\` - ʙᴏᴛ sᴛᴀᴛɪsᴛɪᴄs
+│ ℹ️ \`${config.PREFIX}bot_info\` - ʙᴏᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ
+│ 📋 \`${config.PREFIX}menu\` - sʜᴏᴡ ᴛʜɪs ᴍᴇɴᴜ
+│ 📜 \`${config.PREFIX}allmenu\` - ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ʟɪsᴛ
+│ 🏓 \`${config.PREFIX}ping\` - ᴄʜᴇᴄᴋ ʀᴇsᴘᴏɴsᴇ
+│ 🔗 \`${config.PREFIX}pair\` - ᴘᴀɪʀɪɴɢ ᴄᴏᴅᴇ
+│ ✨ \`${config.PREFIX}fancy\` - ғᴀɴᴄʏ ᴛᴇxᴛ
+│ 🎨 \`${config.PREFIX}logo\` - ᴄᴜsᴛᴏᴍ ʟᴏɢᴏs
+│ 🔮 \`${config.PREFIX}repo\` - ʙᴏᴛ ʀᴇᴘᴏsɪᴛᴏʀʏ
+└──────────────────────
+
+🎵 *ᴍᴇᴅɪᴀ ᴛᴏᴏʟs*
+┌──────────────────────
+│ 🎵 \`${config.PREFIX}song\` - ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴜsɪᴄ
+│ 📱 \`${config.PREFIX}tiktok\` - ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ
+│ 📘 \`${config.PREFIX}fb\` - ғᴀᴄᴇʙᴏᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ
+│ 📸 \`${config.PREFIX}ig\` - ɪɴsᴛᴀɢʀᴀᴍ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ
+│ 🖼️ \`${config.PREFIX}aiimg\` - ᴀɪ ɪᴍᴀɢᴇ ɢᴇɴᴇʀᴀᴛᴏʀ
+│ 👀 \`${config.PREFIX}viewonce\` - ᴠɪᴇᴡᴏɴᴄᴇ ᴍᴇᴅɪᴀ
+│ 🗣️ \`${config.PREFIX}tts\` - ᴛᴇxᴛ ᴛᴏ sᴘᴇᴇᴄʜ
+│ 🎬 \`${config.PREFIX}ts\` - ᴛᴇʀᴀʙᴏx ᴅᴏᴡɴʟᴏᴀᴅᴇʀ
+│ 🖼️ \`${config.PREFIX}sticker\` - ᴍᴀᴋᴇ sᴛɪᴄᴋᴇʀ
+└──────────────────────
+
+👥 *ɢʀᴏᴜᴘ sᴇᴛᴛɪɴɢs*
+┌──────────────────────
+│ ➕ \`${config.PREFIX}add\` - ᴀᴅᴅ ᴍᴇᴍʙᴇʀ
+│ 🦶 \`${config.PREFIX}kick\` - ʀᴇᴍᴏᴠᴇ ᴍᴇᴍʙᴇʀ
+│ 🔓 \`${config.PREFIX}open\` - ᴏᴘᴇɴ ɢʀᴏᴜᴘ
+│ 🔒 \`${config.PREFIX}close\` - ᴄʟᴏsᴇ ɢʀᴏᴜᴘ
+│ 👑 \`${config.PREFIX}promote\` - ᴍᴀᴋᴇ ᴀᴅᴍɪɴ
+│ 😢 \`${config.PREFIX}demote\` - ʀᴇᴍᴏᴠᴇ ᴀᴅᴍɪɴ
+│ 👥 \`${config.PREFIX}tagall\` - ᴛᴀɢ ᴀʟʟ ᴍᴇᴍʙᴇʀs
+│ 👤 \`${config.PREFIX}join\` - ᴊᴏɪɴ ɢʀᴏᴜᴘ
+└──────────────────────
+
+📰 *ɴᴇᴡs & ɪɴғᴏ*
+┌──────────────────────
+│ 📰 \`${config.PREFIX}news\` - ʟᴀᴛᴇsᴛ ɴᴇᴡs
+│ 🚀 \`${config.PREFIX}nasa\` - ɴᴀsᴀ ᴜᴘᴅᴀᴛᴇs
+│ 💬 \`${config.PREFIX}gossip\` - ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ
+│ 🏏 \`${config.PREFIX}cricket\` - ᴄʀɪᴄᴋᴇᴛ sᴄᴏʀᴇs
+└──────────────────────
+
+🎭 *ғᴜɴ ᴄᴏᴍᴍᴀɴᴅs*
+┌──────────────────────
+│ 😂 \`${config.PREFIX}joke\` - ʟɪɢʜᴛ ᴊᴏᴋᴇ
+│ 🌚 \`${config.PREFIX}darkjoke\` - ᴅᴀʀᴋ ᴊᴏᴋᴇ
+│ 🏏 \`${config.PREFIX}waifu\` - ᴀɴɪᴍᴇ ᴡᴀɪғᴜ
+│ 😂 \`${config.PREFIX}meme\` - ʀᴀɴᴅᴏᴍ ᴍᴇᴍᴇ
+│ 🐈 \`${config.PREFIX}cat\` - ᴄᴜᴛᴇ ᴄᴀᴛ
+│ 🐕 \`${config.PREFIX}dog\` - ᴄᴜᴛᴇ ᴅᴏɢ
+│ 💡 \`${config.PREFIX}fact\` - ʀᴀɴᴅᴏᴍ ғᴀᴄᴛ
+│ 💘 \`${config.PREFIX}pickupline\` - ᴘɪᴄᴋᴜᴘ ʟɪɴᴇ
+│ 🔥 \`${config.PREFIX}roast\` - sᴀᴠᴀɢᴇ ʀᴏᴀsᴛ
+│ ❤️ \`${config.PREFIX}lovequote\` - ʟᴏᴠᴇ ǫᴜᴏᴛᴇ
+│ 💭 \`${config.PREFIX}quote\` - ʙᴏʟᴅ ǫᴜᴏᴛᴇ
+└──────────────────────
+
+🔧 *ᴛᴏᴏʟs & ᴜᴛɪʟɪᴛɪᴇs*
+┌──────────────────────
+│ 🤖 \`${config.PREFIX}ai\` - ᴀɪ ᴄʜᴀᴛʙᴏᴛ
+│ 📊 \`${config.PREFIX}winfo\` - ᴡʜᴀᴛsᴀᴘᴘ ɪɴғᴏ
+│ 🔍 \`${config.PREFIX}whois\` - ᴅᴏᴍᴀɪɴ ɪɴғᴏ
+│ 💣 \`${config.PREFIX}bomb\` - ᴍᴜʟᴛɪ ᴍᴇssᴀɢᴇ
+│ 🖼️ \`${config.PREFIX}getpp\` - ᴘʀᴏғɪʟᴇ ᴘɪᴄ
+│ 💾 \`${config.PREFIX}savestatus\` - sᴀᴠᴇ sᴛᴀᴛᴜs
+│ 🌦️ \`${config.PREFIX}weather\` - ᴡᴇᴀᴛʜᴇʀ
+│ 🔗 \`${config.PREFIX}shorturl\` - sʜᴏʀᴛᴇɴ ᴜʀʟ
+│ 📤 \`${config.PREFIX}tourl2\` - ᴜᴘʟᴏᴀᴅ ᴛᴏ ʟɪɴᴋ
+│ 📦 \`${config.PREFIX}apk\` - ᴀᴘᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ
+└──────────────────────
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+💫 *ᴛʏᴘᴇ ${config.PREFIX}ᴀʟʟᴍᴇɴᴜ ғᴏʀ ᴍᴏʀᴇ ᴅᴇᴛᴀɪʟs* 💫
+
+✨ *ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ ᴋʜᴀɴ* ✨
 `;
 
     // Common message context
@@ -728,132 +812,17 @@ case 'menu': {
         forwardingScore: 1,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363404774234361@newsletter',
-            newsletterName: 'ᴍɪɴɪ kirah xᴅ',
+            newsletterJid: '120363426106687970@newsletter',
+            newsletterName: 'ᴍᴜᴢᴀᴍɪʟ xᴅ',
             serverMessageId: -1
         }
     };
 
     const menuMessage = {
-      image: { url: "https://files.catbox.moe/w54zcn.jpg" },
-      caption: `*ᴍɪɴɪ kirah xᴅ*\n${menuText}`,
-      buttons: [
-        {
-          buttonId: `${config.PREFIX}quick_commands`,
-          buttonText: { displayText: 'MINI KIRAH XD' },
-          type: 4,
-          nativeFlowInfo: {
-            name: 'single_select',
-            paramsJson: JSON.stringify({
-              title: 'ᴍɪɴɪ kirah xᴅ ᴄᴍᴅs',
-              sections: [
-                {
-                  title: "🌐 ɢᴇɴᴇʀᴀʟ ᴄᴏᴍᴍᴀɴᴅs",
-                  highlight_label: 'ᴍɪɴɪ kirah xᴅ',
-                  rows: [
-                    { title: "🟢 ᴀʟɪᴠᴇ", description: "ᴄʜᴇᴄᴋ ɪғ ʙᴏᴛ ɪs ᴀᴄᴛɪᴠᴇ", id: `${config.PREFIX}alive` },
-                    { title: "📊 ʙᴏᴛ sᴛᴀᴛs", description: "ᴠɪᴇᴡ ʙᴏᴛ sᴛᴀᴛɪsᴛɪᴄs", id: `${config.PREFIX}bot_stats` },
-                    { title: "ℹ️ ʙᴏᴛ ɪɴғᴏ", description: "ɢᴇᴛ ʙᴏᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ", id: `${config.PREFIX}bot_info` },
-                    { title: "📋 ᴍᴇɴᴜ", description: "Show this menu", id: `${config.PREFIX}menu` },
-                    { title: "📜 ᴀʟʟ ᴍᴇɴᴜ", description: "ʟɪsᴛ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs (ᴛᴇxᴛ)", id: `${config.PREFIX}allmenu` },
-                    { title: "🏓 ᴘɪɴɢ", description: "ᴄʜᴇᴄᴋ ʙᴏᴛ ʀᴇsᴘᴏɴsᴇ sᴘᴇᴇᴅ", id: `${config.PREFIX}ping` },
-                    { title: "🔗 ᴘᴀɪʀ", description: "ɢᴇɴᴇʀᴀᴛᴇ ᴘᴀɪʀɪɴɢ ᴄᴏᴅᴇ", id: `${config.PREFIX}pair` },
-                    { title: "✨ ғᴀɴᴄʏ", description: "ғᴀɴᴄʏ ᴛᴇxᴛ ɢᴇɴᴇʀᴀᴛᴏʀ", id: `${config.PREFIX}fancy` },
-                    { title: "🎨 ʟᴏɢᴏ", description: "ᴄʀᴇᴀᴛᴇ ᴄᴜsᴛᴏᴍ ʟᴏɢᴏs", id: `${config.PREFIX}logo` },
-                    { title: "🔮 ʀᴇᴘᴏ", description: "ᴍᴀɪɴ ʙᴏᴛ ʀᴇᴘᴏsɪᴛᴏʀʏ ғᴏʀᴋ & sᴛᴀʀ", id: `${config.PREFIX}repo` }
-                  ]
-                },
-                {
-                  title: "🎵 ᴍᴇᴅɪᴀ ᴛᴏᴏʟs",
-                  highlight_label: 'New',
-                  rows: [
-                    { title: "🎵 sᴏɴɢ", description: "ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴜsɪᴄ ғʀᴏᴍ ʏᴏᴜᴛᴜʙᴇ", id: `${config.PREFIX}song` },
-                    { title: "📱 ᴛɪᴋᴛᴏᴋ", description: "ᴅᴏᴡɴʟᴏᴀᴅ ᴛɪᴋᴛᴏᴋ ᴠɪᴅᴇᴏs", id: `${config.PREFIX}tiktok` },
-                    { title: "📘 ғᴀᴄᴇʙᴏᴏᴋ", description: "ᴅᴏᴡɴʟᴏᴀᴅ ғᴀᴄᴇʙᴏᴏᴋ ᴄᴏɴᴛᴇɴᴛ", id: `${config.PREFIX}fb` },
-                    { title: "📸 ɪɴsᴛᴀɢʀᴀᴍ", description: "ᴅᴏᴡɴʟᴏᴀᴅ ɪɴsᴛᴀɢʀᴀᴍ ᴄᴏɴᴛᴇɴᴛ", id: `${config.PREFIX}ig` },
-                    { title: "🖼️ ᴀɪ ɪᴍɢ", description: "ɢᴇɴᴇʀᴀᴛᴇ ᴀɪ ɪᴍᴀɢᴇs", id: `${config.PREFIX}aiimg` },
-                    { title: "👀 ᴠɪᴇᴡᴏɴᴄᴇ", description: "ᴀᴄᴄᴇss ᴠɪᴇᴡ-ᴏɴᴄᴇ ᴍᴇᴅɪᴀ", id: `${config.PREFIX}viewonce` },
-                    { title: "🗣️ ᴛᴛs", description: "ᴛʀᴀɴsᴄʀɪʙᴇ [ɴᴏᴛ ɪᴍᴘʟᴇᴍᴇɴᴛᴇᴅ]", id: `${config.PREFIX}tts` },
-                    { title: "🎬 ᴛs", description: "ᴛᴇʀᴀʙᴏx ᴅᴏᴡɴʟᴏᴀᴅᴇʀ [ɴᴏᴛ ɪᴍᴘʟᴇᴍᴇɴᴛᴇᴅ]", id: `${config.PREFIX}ts` },
-                    { title: "🖼️ sᴛɪᴄᴋᴇʀ", description: "ᴄᴏɴᴠᴇʀᴛ ɪᴍᴀɢᴇ/ᴠɪᴅᴇᴏ ᴛᴏ sᴛɪᴄᴋᴇʀ [ɴᴏᴛ ɪᴍᴘʟᴇᴍᴇɴᴛᴇᴅ]", id: `${config.PREFIX}sticker` }
-                  ]
-                },
-                {
-                  title: "🫂 ɢʀᴏᴜᴘ sᴇᴛᴛɪɴɢs",
-                  highlight_label: 'Popular',
-                  rows: [
-                    { title: "➕ ᴀᴅᴅ", description: "ᴀᴅᴅ ɴᴜᴍʙᴇʀs ᴛᴏ ɢʀᴏᴜᴘ", id: `${config.PREFIX}add` },
-                    { title: "🦶 ᴋɪᴄᴋ", description: "ʀᴇᴍᴏᴠᴇ ɴᴜᴍʙᴇʀ ғʀᴏᴍ ɢʀᴏᴜᴘ", id: `${config.PREFIX}kick` },
-                    { title: "🔓 ᴏᴘᴇɴ", description: "ᴏᴘᴇɴ ʟᴏᴄᴋ ɢʀᴏᴜᴘ", id: `${config.PREFIX}open` },
-                    { title: "🔒 ᴄʟᴏsᴇ", description: "ᴄʟᴏsᴇ ɢʀᴏᴜᴘ", id: `${config.PREFIX}close` },
-                    { title: "👑 ᴘʀᴏᴍᴏᴛᴇ", description: "ᴘʀᴏᴍᴏᴛᴇ ᴍᴇᴍʙᴇʀ ᴛᴏ ᴀᴅᴍɪɴ", id: `${config.PREFIX}promote` },
-                    { title: "😢 ᴅᴇᴍᴏᴛᴇ", description: "Demote Member from Admin", id: `${config.PREFIX}demote` },
-                    { title: "👥 ᴛᴀɢᴀʟʟ", description: "ᴛᴀɢ ᴀʟʟ ᴍᴇᴍʙᴇʀs ɪɴ ᴀ ɢʀᴏᴜᴘ", id: `${config.PREFIX}tagall` },
-                    { title: "👤 ᴊᴏɪɴ", description: "ᴊᴏɪɴ ᴀ ɢʀᴏᴜᴘ", id: `${config.PREFIX}join` }
-                  ]
-                },
-                {
-                  title: "📰 ɴᴇᴡs & ɪɴғᴏ",
-                  rows: [
-                    { title: "📰 ɴᴇᴡs", description: "ɢᴇᴛ ʟᴀᴛᴇsᴛ ɴᴇᴡs ᴜᴘᴅᴀᴛᴇs", id: `${config.PREFIX}news` },
-                    { title: "🚀 ɴᴀsᴀ", description: "ɴᴀsᴀ sᴘᴀᴄᴇ ᴜᴘᴅᴀᴛᴇs", id: `${config.PREFIX}nasa` },
-                    { title: "💬 ɢᴏssɪᴘ", description: "ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ ɢᴏssɪᴘ", id: `${config.PREFIX}gossip` },
-                    { title: "🏏 ᴄʀɪᴄᴋᴇᴛ", description: "ᴄʀɪᴄᴋᴇᴛ sᴄᴏʀᴇs & ɴᴇᴡs", id: `${config.PREFIX}cricket` },
-                    { title: "🎭 ᴀɴᴏɴʏᴍᴏᴜs", description: "ғᴜɴ ɪɴᴛᴇʀᴀᴄᴛɪᴏɴ [ɴᴏᴛ ɪᴍᴘʟᴇᴍᴇɴᴛᴇᴅ]", id: `${config.PREFIX}anonymous` }
-                  ]
-                },
-                {
-                  title: "🖤 ʀᴏᴍᴀɴᴛɪᴄ, sᴀᴠᴀɢᴇ & ᴛʜɪɴᴋʏ",
-                  highlight_label: 'Fun',
-                  rows: [
-                    { title: "😂 ᴊᴏᴋᴇ", description: "ʜᴇᴀʀ ᴀ ʟɪɢʜᴛʜᴇᴀʀᴛᴇᴅ ᴊᴏᴋᴇ", id: `${config.PREFIX}joke` },
-                    { title: "🌚 ᴅᴀʀᴋ ᴊᴏᴋᴇ", description: "ɢᴇᴛ ᴀ ᴅᴀʀᴋ ʜᴜᴍᴏʀ ᴊᴏᴋᴇ", id: `${config.PREFIX}darkjoke` },
-                    { title: "🏏 ᴡᴀɪғᴜ", description: "ɢᴇᴛ ᴀ ʀᴀɴᴅᴏᴍ ᴀɴɪᴍᴇ ᴡᴀɪғᴜ", id: `${config.PREFIX}waifu` },
-                    { title: "😂 ᴍᴇᴍᴇ", description: "ʀᴇᴄᴇɪᴠᴇ ᴀ ʀᴀɴᴅᴏᴍ ᴍᴇᴍᴇ", id: `${config.PREFIX}meme` },
-                    { title: "🐈 ᴄᴀᴛ", description: "ɢᴇᴛ ᴀ ᴄᴜᴛᴇ ᴄᴀᴛ ᴘɪᴄᴛᴜʀᴇ", id: `${config.PREFIX}cat` },
-                    { title: "🐕 ᴅᴏɢ", description: "sᴇᴇ ᴀ ᴄᴜᴛᴇ ᴅᴏɢ ᴘɪᴄᴛᴜʀᴇ", id: `${config.PREFIX}dog` },
-                    { title: "💡 ғᴀᴄᴛ", description: "ʟᴇᴀʀɴ ᴀ ʀᴀɴᴅᴏᴍ ғᴀᴄᴛ", id: `${config.PREFIX}fact` },
-                    { title: "💘 ᴘɪᴄᴋᴜᴘ ʟɪɴᴇ", description: "ɢᴇᴛ ᴀ ᴄʜᴇᴇsʏ ᴘɪᴄᴋᴜᴘ ʟɪɴᴇ", id: `${config.PREFIX}pickupline` },
-                    { title: "🔥 ʀᴏᴀsᴛ", description: "ʀᴇᴄᴇɪᴠᴇ ᴀ sᴀᴠᴀɢᴇ ʀᴏᴀsᴛ", id: `${config.PREFIX}roast` },
-                    { title: "❤️ ʟᴏᴠᴇ ϙᴜᴏᴛᴇ", description: "ɢᴇᴛ ᴀ ʀᴏᴍᴀɴᴛɪᴄ ʟᴏᴠᴇ ǫᴜᴏᴛᴇ", id: `${config.PREFIX}lovequote` },
-                    { title: "💭 ϙᴜᴏᴛᴇ", description: "ʀᴇᴄᴇɪᴠᴇ ᴀ ʙᴏʟᴅ ǫᴜᴏᴛᴇ", id: `${config.PREFIX}quote` }
-                  ]
-                },
-                {
-                  title: "🔧 ᴛᴏᴏʟs & ᴜᴛɪʟɪᴛɪᴇs",
-                  rows: [
-                    { title: "🤖 ᴀɪ", description: "ᴄʜᴀᴛ ᴡɪᴛʜ ᴀɪ ᴀssɪsᴛᴀɴᴛ", id: `${config.PREFIX}ai` },
-                    { title: "📊 ᴡɪɴғᴏ", description: "ɢᴇᴛ ᴡʜᴀᴛsᴀᴘᴘ ᴜsᴇʀ ɪɴғᴏ", id: `${config.PREFIX}winfo` },
-                    { title: "🔍 ᴡʜᴏɪs", description: "ʀᴇᴛʀɪᴇᴠᴇ ᴅᴏᴍᴀɪɴ ᴅᴇᴛᴀɪʟs", id: `${config.PREFIX}whois` },
-                    { title: "💣 ʙᴏᴍʙ", description: "sᴇɴᴅ ᴍᴜʟᴛɪᴘʟᴇ ᴍᴇssᴀɢᴇs", id: `${config.PREFIX}bomb` },
-                    { title: "🖼️ ɢᴇᴛᴘᴘ", description: "ғᴇᴛᴄʜ ᴘʀᴏғɪʟᴇ ᴘɪᴄᴛᴜʀᴇ", id: `${config.PREFIX}getpp` },
-                    { title: "💾 sᴀᴠᴇsᴛᴀᴛᴜs", description: "ᴅᴏᴡɴʟᴏᴀᴅ sᴏᴍᴇᴏɴᴇ's sᴛᴀᴛᴜs", id: `${config.PREFIX}savestatus` },
-                    { title: "✍️ sᴇᴛsᴛᴀᴛᴜs", description: "ᴜᴘᴅᴀᴛᴇ ʏᴏᴜʀ sᴛᴀᴛᴜs [ɴᴏᴛ ɪᴍᴘʟᴇᴍᴇɴᴛᴇᴅ]", id: `${config.PREFIX}setstatus` },
-                    { title: "🗑️ ᴅᴇʟᴇᴛᴇ ᴍᴇ", description: "ʀᴇᴍᴏᴠᴇ ʏᴏᴜʀ ᴅᴀᴛᴀ [ɴᴏᴛ ɪᴍᴘʟᴇᴍᴇɴᴛᴇᴅ]", id: `${config.PREFIX}deleteme` },
-                    { title: "🌦️ ᴡᴇᴀᴛʜᴇʀ", description: "ɢᴇᴛ ᴡᴇᴀᴛʜᴇʀ ғᴏʀᴇᴄᴀsᴛ", id: `${config.PREFIX}weather` },
-                    { title: "🔗 sʜᴏʀᴛᴜʀʟ", description: "ᴄʀᴇᴀᴛᴇ sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ", id: `${config.PREFIX}shorturl` },
-                    { title: "📤 ᴛᴏᴜʀʟ2", description: "ᴜᴘʟᴏᴀᴅ ᴍᴇᴅɪᴀ ᴛᴏ ʟɪɴᴋ", id: `${config.PREFIX}tourl2` },
-                    { title: "📦 ᴀᴘᴋ", description: "ᴅᴏᴡɴʟᴏᴀᴅ ᴀᴘᴋ ғɪʟᴇs", id: `${config.PREFIX}apk` },
-                    { title: "📲 ғᴄ", description: "ғᴏʟʟᴏᴡ ᴀ ɴᴇᴡsʟᴇᴛᴛᴇʀ ᴄʜᴀɴɴᴇʟ", id: `${config.PREFIX}fc` }
-                  ]
-                }
-              ]
-            })
-          }
-        },
-        {
-          buttonId: `${config.PREFIX}bot_stats`,
-          buttonText: { displayText: '🌟 ʙᴏᴛ sᴛᴀᴛs' },
-          type: 1
-        },
-        {
-          buttonId: `${config.PREFIX}bot_info`,
-          buttonText: { displayText: '🌸 ʙᴏᴛ ɪɴғᴏ' },
-          type: 1
-        }
-      ],
+      image: { url: "https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg" },
+      caption: `🌟 *ᴍᴜᴢᴀᴍɪʟ-xᴅ ʙᴏᴛ* 🌟\n${menuText}`,
       headerType: 1,
-      contextInfo: messageContext // Added the newsletter context here
+      contextInfo: messageContext
     };
     
     await socket.sendMessage(from, menuMessage, { quoted: fakevCard });
@@ -863,134 +832,23 @@ case 'menu': {
     const usedMemory = Math.round(process.memoryUsage().heapUsed / 1024 / 1024);
     const totalMemory = Math.round(os.totalmem() / 1024 / 1024);
     let fallbackMenuText = `
-╭───────────────⭓
-│ ʙᴏᴛ : ᴍɪɴɪ kirah xᴅ
-│ ᴜsᴇʀ: @${sender.split("@")[0]}
-│ ᴘʀᴇғɪx: ${config.PREFIX}
-│ ᴍᴇᴍᴏʀʏ : ${usedMemory}MB/${totalMemory}ᴍʙ
-│ ᴍᴇᴍᴏʀʏ: ${usedMemory}MB/${totalMemory}ᴍʙ
-╰───────────────⭓
+✨ *╔══════════════════════╗* ✨
+    *🤖 ᴍᴜᴢᴀᴍɪʟ-xᴅ ʙᴏᴛ* 🤖
+✨ *╚══════════════════════╝* ✨
 
-${config.PREFIX}ᴀʟʟᴍᴇɴᴜ ᴛᴏ ᴠɪᴇᴡ ᴀʟʟ ᴄᴍᴅs 
-> *ᴍᴀᴅᴇ ɪɴ ʙʏ kirah*
+👤 *ᴜsᴇʀ:* @${sender.split("@")[0]}
+⚡ *ᴘʀᴇғɪx:* ${config.PREFIX}
+💾 *ᴍᴇᴍᴏʀʏ:* ${usedMemory}MB/${totalMemory}MB
+
+📋 *ᴜsᴇ ${config.PREFIX}ᴀʟʟᴍᴇɴᴜ ᴛᴏ ᴠɪᴇᴡ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs*
+
+✨ *ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ ᴋʜᴀɴ* ✨
 `;
 
     await socket.sendMessage(from, {
-      image: { url: "https://files.catbox.moe/w54zcn.jpg" },
+      image: { url: "https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg" },
       caption: fallbackMenuText,
       contextInfo: messageContext 
-        // Added the newsletter context here too
-          }, { quoted: fakevCard });
-    await socket.sendMessage(sender, { react: { text: '❌', key: msg.key } });
-  }
-  break;
-}
-  case 'allmenu': {
-  try {
-    await socket.sendMessage(sender, { react: { text: '📜', key: msg.key } });
-    const startTime = socketCreationTime.get(number) || Date.now();
-    const uptime = Math.floor((Date.now() - startTime) / 1000);
-    const hours = Math.floor(uptime / 3600);
-    const minutes = Math.floor((uptime % 3600) / 60);
-    const seconds = Math.floor(uptime % 60);
-    const usedMemory = Math.round(process.memoryUsage().heapUsed / 1024 / 1024);
-    const totalMemory = Math.round(os.totalmem() / 1024 / 1024);
-    
-
-    let allMenuText = `
-╭───────────────⭓
-│ ʙᴏᴛ : ᴍɪɴɪ kirah xᴅ
-│ ᴜsᴇʀ: @${sender.split("@")[0]}
-│ ᴘʀᴇғɪx: ${config.PREFIX}
-│ ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s
-│ ᴍᴇᴍᴏʀʏ : ${usedMemory}MB/${totalMemory}ᴍʙ
-│ ᴄᴏᴍᴍᴀɴᴅs: ${count}
-│ ᴅᴇᴠ: Mrs_Kirah 
-╰───────────────⭓
-
-⭓───────────────⭓『 🌐 ɢᴇɴᴇʀᴀʟ 』
-│ ⬡ ᴀʟɪᴠᴇ
-│ ⬡ ʙʀᴏᴀᴅᴄᴀsᴛ
-│ ⬡ ᴏᴡɴᴇʀ
-│ ⬡ ʙᴏᴛ_sᴛᴀᴛs
-│ ⬡ ʙᴏᴛ_ɪɴғᴏ
-│ ⬡ ᴍᴇɴᴜ
-│ ⬡ ᴀʟʟᴍᴇɴᴜ
-│ ⬡ ᴘɪɴɢ
-│ ⬡ ᴄᴏᴅᴇ
-│ ⬡ ғᴀɴᴄʏ
-│ ⬡ ʟᴏɢᴏ
-│ ⬡ ǫʀ
-╰──────────────────⭓
-
-⭓───────────────⭓『 📥 ᴅᴏᴡɴʟᴏᴀᴅ 』
-│ ⬡ sᴏɴɢ
-│ ⬡ ᴛɪᴋᴛᴏᴋ
-│ ⬡ ғʙ
-│ ⬡ ɪɢ
-│ ⬡ ᴀɪɪᴍɢ
-│ ⬡ ᴠɪᴇᴡᴏɴᴄᴇ
-│ ⬡ ᴛᴛs
-│ ⬡ ᴛs
-│ ⬡ sᴛɪᴄᴋᴇʀ
-╰──────────────────⭓
-
-⭓───────────────⭓『 👥 ɢʀᴏᴜᴘ 』
-│ ⬡ ᴀᴅᴅ
-│ ⬡ sᴇᴛɴᴀᴍᴇ
-│ ⬡ ᴡᴀʀɴ
-│ ⬡ ᴋɪᴄᴋ
-│ ⬡ ᴏᴘᴇɴ
-│ ⬡ ᴋɪᴄᴋᴀʟʟ
-│ ⬡ ᴄʟᴏsᴇ
-│ ⬡ ɪɴᴠɪᴛᴇ
-│ ⬡ ᴘʀᴏᴍᴏᴛᴇ
-│ ⬡ ᴅᴇᴍᴏᴛᴇ
-│ ⬡ ᴛᴀɢᴀʟʟ
-│ ⬡ ᴊᴏɪɴ
-╰──────────────────⭓
-
-⭓───────────────⭓『 🎭 ғᴜɴ 』
-│ ⬡ ᴊᴏᴋᴇ
-│ ⬡ ᴅᴀʀᴋᴊᴏᴋᴇ
-│ ⬡ ᴡᴀɪғᴜ
-│ ⬡ ᴍᴇᴍᴇ
-│ ⬡ ᴄᴀᴛ
-│ ⬡ ᴅᴏɢ
-│ ⬡ ғᴀᴄᴛ
-│ ⬡ ᴘɪᴄᴋᴜᴘʟɪɴᴇ
-│ ⬡ ʀᴏᴀsᴛ
-│ ⬡ ʟᴏᴠᴇǫᴜᴏᴛᴇ
-│ ⬡ ǫᴜᴏᴛᴇ
-╰──────────────────⭓
-
-⭓───────────────⭓『 ⚡ ᴍᴀɪɴ 』
-│ ⬡ ᴀɪ
-│ ⬡ ᴡɪɴғᴏ
-│ ⬡ ᴡʜᴏɪs
-│ ⬡ ʙᴏᴍʙ
-│ ⬡ ɢᴇᴛᴘᴘ
-│ ⬡ sᴀᴠᴇsᴛᴀᴛᴜs
-│ ⬡ sᴇᴛsᴛᴀᴛᴜs
-│ ⬡ ᴅᴇʟᴇᴛᴇᴍᴇ
-│ ⬡ ᴡᴇᴀᴛʜᴇʀ
-│ ⬡ sʜᴏʀᴛᴜʀʟ
-│ ⬡ ᴛᴏᴜʀʟ2
-│ ⬡ ᴀᴘᴋ
-│ ⬡ ғᴄ
-╰──────────────────⭓
-> *ᴍᴀᴅᴇ ɪɴ ʙʏ Mrs_Kirah*
-`;
-
-    await socket.sendMessage(from, {
-      image: { url: "https://files.catbox.moe/w54zcn.jpg" },
-      caption: allMenuText
-    }, { quoted: fakevCard });
-    await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
-  } catch (error) {
-    console.error('Allmenu command error:', error);
-    await socket.sendMessage(from, {
-      text: `❌* ᴛʜᴇ ᴍᴇɴᴜ ɢᴏᴛ sʜʏ! 😢*\nError: ${error.message || 'Unknown error'}\nTry again, love?`
     }, { quoted: fakevCard });
     await socket.sendMessage(sender, { react: { text: '❌', key: msg.key } });
   }
@@ -1414,7 +1272,7 @@ case 'song': {
         
         // Create description
         const desc = `
-     ᴍɪɴɪ ɪɴᴄᴏɴɴᴜ xᴅ
+     ᴍɪɴɪ ᴍᴜᴢᴀᴍɪʟ-xᴅ
 ╭───────────────⭓
 │ ᴛɪᴛʟᴇ: ${videoInfo.title}
 │ ᴀʀᴛɪsᴛ: ${videoInfo.author.name}
@@ -1423,7 +1281,7 @@ case 'song': {
 │ ᴠɪᴇᴡs: ${videoInfo.views.toLocaleString()}
 │ Format: ʜɪɢʜ ǫᴜᴀʟɪᴛʏ ᴍᴘ3
 ╰───────────────⭓
-> ᴍᴀᴅᴇ ɪɴ ʙʏ kirah
+> ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ-xᴅ
 `;
 
         // Send video info
@@ -1434,8 +1292,8 @@ case 'song': {
                 forwardingScore: 1,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363404774234361@newsletter',
-                    newsletterName: 'ᴍɪɴɪ kirah xᴅ',
+                    newsletterJid: '120363426106687970@newsletter',
+                    newsletterName: 'ᴍᴜᴢᴀᴍɪʟ',
                     serverMessageId: -1
                 }
             }
@@ -1530,8 +1388,8 @@ case 'song': {
                         ],
                         headerType: 1,
                         viewOnce: true,
-                        caption: '❏ *ʟᴏɢᴏ ᴍᴀᴋᴇʀ*',
-                        image: { url: 'https://files.catbox.moe/w54zcn.jpg' },
+                        caption: '❏ *ᴍᴜᴢᴀᴍɪʟ-xᴅ ʟᴏɢᴏ ᴍᴀᴋᴇʀ*',
+                        image: { url: 'https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg' },
                     };
 
                     await socket.sendMessage(from, buttonMessage, { quoted: fakevCard });
@@ -1595,7 +1453,7 @@ case 'song': {
                             .map(font => `*${font.name}:*\n${font.result}`)
                             .join("\n\n");
 
-                        const finalMessage = `🎨 *ғᴀɴᴄʏ ғᴏɴᴛs ᴄᴏɴᴠᴇʀᴛᴇʀ*\n\n${fontList}\n\n> ᴍᴀᴅᴇ ɪɴ ʙʏ ɪɴᴄᴏɴɴᴜ`;
+                        const finalMessage = `🎨 *ғᴀɴᴄʏ ғᴏɴᴛs ᴄᴏɴᴠᴇʀᴛᴇʀ*\n\n${fontList}\n\n> ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ`;
 
                         await socket.sendMessage(sender, {
                             text: finalMessage
@@ -1706,7 +1564,7 @@ let data;
 
     // Prepare caption
     const caption = `
-   ᴍɪɴɪ kirah xᴅ
+   ᴍɪɴɪ ᴍᴜᴢᴀᴍɪʟ-xᴅ
 ╭───────────────⭓
 │ ᴛɪᴛᴛʟᴇ: ${title.replace(/[<>:"\/\\|?*]/g, '')}
 │ ᴀᴜᴛʜᴏʀ: @${author.username.replace(/[<>:"\/\\|?*]/g, '')} (${author.nickname.replace(/[<>:"\/\\|?*]/g, '')})
@@ -1715,12 +1573,12 @@ let data;
 │ sʜᴀʀᴇs: ${metrics.share_count.toLocaleString()}
 │ ᴅᴏᴡɴʟᴏᴀᴅs: ${metrics.download_count.toLocaleString()}
 ╰───────────────⭓
-> ᴍᴀᴅᴇ ɪɴ ʙʏ kirah
+> ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ-xᴅ
 `;
 
     // Send thumbnail with info
     await socket.sendMessage(sender, {
-      image: { url: thumbnail || 'https://i.ibb.co/ynmqJG8j/vision-v.jpg' }, // Fallback image
+      image: { url: thumbnail || 'https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg' }, // Fallback image
       caption
     }, { quoted: fakevCard });
 
@@ -1920,7 +1778,7 @@ case "dog": {
         }
         await socket.sendMessage(sender, {
             image: { url: data.message },
-            caption: '🐶 Woof! Here\'s a cute dog!'
+            caption: '🐶 Woof! Here\'s a cute dog! ʙʏ ᴍᴜᴢᴀᴍɪʟ!'
         }, { quoted: fakevCard });
     } catch (err) {
         console.error(err);
@@ -2042,7 +1900,7 @@ case "lovequote": {
                         await socket.sendMessage(sender, {
                             video: { url: result.sd },
                             mimetype: 'video/mp4',
-                            caption: '> ᴍᴀᴅᴇ ɪɴ ʙʏ kirah'
+                            caption: '> ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ'
                         }, { quoted: fakevCard });
 
                         await socket.sendMessage(sender, { react: { text: '✔', key: msg.key } });
@@ -2074,9 +1932,9 @@ case "lovequote": {
                         await socket.sendMessage(sender, {
                             image: { url: thumbnailUrl },
                             caption: formatMessage(
-                                '🌌 ᴍɪɴɪ ʙᴏᴛ kirah',
+                                '🌌 ᴍɪɴɪ ʙᴏᴛ ᴍᴜᴢᴀᴍɪʟ-xᴅ',
                                 `🌠 *${title}*\n\n${explanation.substring(0, 200)}...\n\n📆 *ᴅᴀᴛᴇ*: ${date}\n${copyright ? `📝 *ᴄʀᴇᴅɪᴛ*: ${copyright}` : ''}\n🔗 *Link*: https://apod.nasa.gov/apod/astropix.html`,
-                                'ᴘᴏᴡᴇʀᴇᴅ ʙʏ kirah'
+                                'ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴜᴢᴀᴍɪʟ'
                             )
                         });
                     } catch (error) {
@@ -2124,9 +1982,9 @@ case "lovequote": {
                         await socket.sendMessage(sender, {
                             image: { url: thumbnailUrl },
                             caption: formatMessage(
-                                '📰 ᴍɪɴɪ kirah xᴅ 📰',
+                                '📰 ᴍɪɴɪ ᴍᴜᴢᴀᴍɪʟ-xᴅ 📰',
                                 `📢 *${title}*\n\n${desc}\n\n🕒 *ᴅᴀᴛᴇ*: ${date}\n🌐 *Link*: ${link}`,
-                                'ᴘᴏᴡᴇʀᴇᴅ ʙʏ kirah'
+                                'ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴜᴢᴀᴍɪʟ'
                             )
                         });
                     } catch (error) {
@@ -2167,7 +2025,7 @@ case "lovequote": {
                         console.log('Sending message to user...');
                         await socket.sendMessage(sender, {
                             text: formatMessage(
-                                '🏏 ᴍɪɴɪ ɪɴᴄᴏɴɴᴜ xᴅ ᴄʀɪᴄᴋᴇᴛ ɴᴇᴡs🏏',
+                                '🏏 ᴍɪɴɪ ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴄʀɪᴄᴋᴇᴛ ɴᴇᴡs🏏',
                                 `📢 *${title}*\n\n` +
                                 `🏆 *ᴍᴀʀᴋ*: ${score}\n` +
                                 `🎯 *ᴛᴏ ᴡɪɴ*: ${to_win}\n` +
@@ -2195,7 +2053,7 @@ case "lovequote": {
                             image: { url: config.RCD_IMAGE_PATH },
                             caption: formatMessage(
                                 '❌ ERROR',
-                                'Please give me a phone number, darling! Usage: .winfo 509447xxxxxxxx',
+                                'Please give me a phone number, darling! Usage: .winfo 92xxxxxxxx',
                                 'ᴍᴀᴅᴇ ɪɴ ʙʏ kirah'
                             )
                         });
@@ -2208,7 +2066,7 @@ case "lovequote": {
                             image: { url: config.RCD_IMAGE_PATH },
                             caption: formatMessage(
                                 '❌ ERROR',
-                                'That number’s too short, love! Try: .winfo +5544xxxxx',
+                                'That number’s too short, love! Try: .winfo +92××××xxxx',
                                 'ᴍᴀᴅᴇ ɪɴ ʙʏ kirah'
                             )
                         });
@@ -2233,7 +2091,7 @@ case "lovequote": {
                     try {
                         winfoPpUrl = await socket.profilePictureUrl(winfoJid, 'image');
                     } catch {
-                        winfoPpUrl = 'https://i.ibb.co/KhYC4FY/1221bc0bdd2354b42b293317ff2adbcf-icon.png';
+                        winfoPpUrl = 'https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg';
                     }
 
                     let winfoName = winfoJid.split('@')[0];
@@ -2267,7 +2125,7 @@ case "lovequote": {
                     const userInfoWinfo = formatMessage(
                         '🔍 𝐏𝐑𝐎𝐅𝐈𝐋𝐄 𝐈𝐍𝐅𝐎',
                         `> *ɴᴜᴍʙᴇʀ:* ${winfoJid.replace(/@.+/, '')}\n\n> *ᴀᴄᴄᴏᴜɴᴛ ᴛʏᴘᴇ:* ${winfoUser.isBusiness ? '💼 ʙᴜsɪɴᴇss' : '👤 Personal'}\n\n*📝 ᴀʙᴏᴜᴛ:*\n${winfoBio}\n\n*🕒 ʟᴀsᴛ sᴇᴇɴ:* ${winfoLastSeen}`,
-                        'ᴍᴀᴅᴇ ɪɴ ʙʏ kirah'
+                        'ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ'
                     );
 
                     await socket.sendMessage(sender, {
@@ -2310,7 +2168,7 @@ case "lovequote": {
                             await socket.sendMessage(sender, {
                                 video: { url: videoUrl },
                                 mimetype: 'video/mp4',
-                                caption: '> ᴍᴀᴅᴇ ɪɴ ʙʏ kirah'
+                                caption: '> ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ'
                             }, { quoted: fakevCard });
 
                             await socket.sendMessage(sender, { react: { text: '✔', key: msg.key } });
@@ -2401,8 +2259,8 @@ const messageContext = {
         forwardingScore: 1,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363404774234361@newsletter',
-            newsletterName: 'mini kirah md',
+            newsletterJid: '120363426106687970@newsletter',
+            newsletterName: 'ᴍᴜᴢᴀᴍɪʟ-xᴅ',
             serverMessageId: -1
         }
     };
@@ -2410,7 +2268,7 @@ const messageContext = {
     // Send AI response with image and newsletter context
 
   await socket.sendMessage(sender, {
-        image: { url: 'https://files.catbox.moe/w54zcn.jpg' }, // Replace with your AI response image
+        image: { url: 'https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg' }, // Replace with your AI response image
         caption: response,
         ...messageContext
     }, { quoted: fakevCard });
@@ -2491,7 +2349,7 @@ await socket.sendMessage(sender, { react: { text: '👤', key: msg.key } });
 
                         await socket.sendMessage(sender, {
                             image: imageBuffer,
-                            caption: `🧠 *kirah ʙᴏᴛ ᴀɪ ɪᴍᴀɢᴇ*\n\n📌 ᴘʀᴏᴍᴘᴛ: ${prompt}`
+                            caption: `🧠 *ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴀɪ ɪᴍᴀɢᴇ*\n\n📌 ᴘʀᴏᴍᴘᴛ: ${prompt}`
                         }, { quoted: fakevCard });
                     } catch (err) {
                         console.error('AI Image Error:', err);
@@ -2538,7 +2396,7 @@ await socket.sendMessage(sender, { react: { text: '👤', key: msg.key } });
                         await socket.sendMessage(sender, {
                             image: { url: thumbnailUrl },
                             caption: formatMessage(
-                                '📰 ᴍɪɴɪ kirah xᴅ ɢᴏssɪᴘ ʟᴀᴛᴇsᴛ ɴᴇᴡs් 📰',
+                                '📰 ᴍᴜᴢᴀᴍɪʟ-xᴅ ʟᴀᴛᴇsᴛ ɴᴇᴡs් 📰',
                                 `📢 *${title}*\n\n${desc}\n\n🕒 *ᴅᴀᴛᴇ*: ${date || 'Not yet given'}\n🌐 *ʟɪɴᴋ*: ${link}`,
                                 'ᴍɪɴɪ kirah'
                             )
@@ -2572,7 +2430,7 @@ await socket.sendMessage(sender, { react: { text: '👤', key: msg.key } });
                     }
                     if (args.length === 0) {
                         await socket.sendMessage(sender, {
-                            text: `📌 *ᴜsᴀɢᴇ:* ${config.PREFIX}add +50944xxxxx\n\nExample: ${config.PREFIX}add +50944xxxxx`
+                            text: `📌 *ᴜsᴀɢᴇ:* ${config.PREFIX}add +92××××xxxxx\n\nExample: ${config.PREFIX}add +50944xxxxx`
                         }, { quoted: fakevCard });
                         break;
                     }
@@ -2612,7 +2470,7 @@ await socket.sendMessage(sender, { react: { text: '👤', key: msg.key } });
                     }
                     if (args.length === 0 && !msg.quoted) {
                         await socket.sendMessage(sender, {
-                            text: `📌 *ᴜsᴀɢᴇ:* ${config.PREFIX}ᴋɪᴄᴋ +50944xxxx ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴡɪᴛʜ ${config.PREFIX}ᴋɪᴄᴋ`
+                            text: `📌 *ᴜsᴀɢᴇ:* ${config.PREFIX}ᴋɪᴄᴋ +92×××××xxx ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴡɪᴛʜ ${config.PREFIX}ᴋɪᴄᴋ`
                         }, { quoted: fakevCard });
                         break;
                     }
@@ -2627,7 +2485,7 @@ await socket.sendMessage(sender, { react: { text: '👤', key: msg.key } });
                         await socket.sendMessage(sender, {
                             text: formatMessage(
                                 '🗑️ 𝐌𝐄𝐌𝐁𝐄𝐑 𝐊𝐈𝐂𝐊𝐄𝐃',
-                                `sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴇᴍᴏᴠᴇᴅ ${numberToKick.split('@')[0]} ғʀᴏᴍ ᴛʜᴇ ɢʀᴏᴜᴘ! 🚪`,
+                                `sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴇᴍᴏᴠᴇᴅ ${numberToKick.split('@')[0]} ғʀᴏᴍ ᴛʜᴇ ɢʀᴏᴜᴘ! 🚪ʙʏ ᴍᴜᴢᴀᴍɪʟ!`,
                                 config.BOT_FOOTER
                             )
                         }, { quoted: fakevCard });
@@ -2657,7 +2515,7 @@ await socket.sendMessage(sender, { react: { text: '👤', key: msg.key } });
                     }
                     if (args.length === 0 && !msg.quoted) {
                         await socket.sendMessage(sender, {
-                            text: `📌 *ᴜsᴀɢᴇ:* ${config.PREFIX}ᴘʀᴏᴍᴏᴛᴇ +254xxxxx ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴡɪᴛʜ ${config.PREFIX}promote`
+                            text: `📌 *ᴜsᴀɢᴇ:* ${config.PREFIX}ᴘʀᴏᴍᴏᴛᴇ +92×××xxxxx ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴡɪᴛʜ ${config.PREFIX}promote`
                         }, { quoted: fakevCard });
                         break;
                     }
@@ -2686,7 +2544,7 @@ await socket.sendMessage(sender, { react: { text: '👤', key: msg.key } });
                 }
 
                 // Case: demote - Demote a group admin to member
-                case 'demote': {
+                case 'dismiss': {
                 await socket.sendMessage(sender, { react: { text: '🙆‍♀️', key: msg.key } });
                     if (!isGroup) {
                         await socket.sendMessage(sender, {
@@ -2702,7 +2560,7 @@ await socket.sendMessage(sender, { react: { text: '👤', key: msg.key } });
                     }
                     if (args.length === 0 && !msg.quoted) {
                         await socket.sendMessage(sender, {
-                            text: `📌 *ᴜsᴀɢᴇ:* ${config.PREFIX}ᴅᴇᴍᴏᴛᴇ +50944xxxx ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴡɪᴛʜ ${config.PREFIX}ᴅᴇᴍᴏᴛᴇ`
+                            text: `📌 *ᴜsᴀɢᴇ:* ${config.PREFIX}ᴅᴇᴍᴏᴛᴇ +92××××xxxx ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴡɪᴛʜ ${config.PREFIX}ᴅᴇᴍᴏᴛᴇ`
                         }, { quoted: fakevCard });
                         break;
                     }
@@ -2756,15 +2614,15 @@ const messageContext = {
             forwardingScore: 1,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363404774234361@newsletter',
-                newsletterName: 'kirah',
+                newsletterJid: '120363426106687970@newsletter',
+                newsletterName: 'ᴍᴜᴢᴀᴍɪʟ-xᴅ',
                 serverMessageId: -1
             }
         };
         
         // Send image with success message
         await socket.sendMessage(sender, {
-            image: { url: 'https://files.catbox.moe/w54zcn.jpg' }, // Replace with your image URL
+            image: { url: 'https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg' }, // Replace with your image URL
             caption: formatMessage(
                 '🔓 𝐆𝐑𝐎𝐔𝐏 𝐎𝐏𝐄𝐍𝐄𝐃',
                 'ɢʀᴏᴜᴘ ɪs ɴᴏᴡ ᴏᴘᴇɴ! ᴀʟʟ ᴍᴇᴍʙᴇʀs ᴄᴀɴ sᴇɴᴅ ᴍᴇssᴀɢᴇs. 🗣️',
@@ -2806,15 +2664,15 @@ case 'close': case 'mute': {
             forwardingScore: 1,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363404774234361@newsletter',
-                newsletterName: 'kirah',
+                newsletterJid: '120363426106687970@newsletter',
+                newsletterName: 'ᴍᴜᴢᴀᴍɪʟ ᴋʜᴀɴ',
                 serverMessageId: -1
             }
         };
         
         // Send image with success message
         await socket.sendMessage(sender, {
-            image: { url: 'https://files.catbox.moe/w54zcn.jpg' }, // Replace with your image URL
+            image: { url: 'https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg' }, // Replace with your image URL
             caption: formatMessage(
                 '🔒 𝐆𝐑𝐎𝐔𝐏 𝐂𝐋𝐎𝐒𝐄𝐃',
                 'ɢʀᴏᴜᴘ ɪs ɴᴏᴡ ᴄʟᴏsᴇᴅ! ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ sᴇɴᴅ ᴍᴇssᴀɢᴇs. 🤫',
@@ -2931,8 +2789,8 @@ case 'cleargroup': {
         const senderName = msg.pushName || sender.split('@')[0];
         
         await socket.sendMessage(from, {
-            image: { url: "https://files.catbox.moe/w54zcn.jpg" },
-            caption: `╭───────────────⭓\n│\n│ ɢʀᴏᴜᴘ ɴᴀᴍᴇ: ${groupMetadata.subject}\n│ ᴍᴇᴍʙᴇʀs: ${participants.length}\n│ ᴀᴅᴍɪɴs: ${adminCount}\n│ ᴜsᴇʀ: @${sender.split('@')[0]}\n│ ᴍᴇssᴀɢᴇ: ${message}\n│\n╰───────────────⭓\n\n> ᴍɪɴɪ ɪɴᴄᴏɴɴᴜ xᴅ ᴛᴀɢᴀʟʟ\n\n${mentionsText}`,
+            image: { url: "https://i.ibb.co/wrLhnsxD/upload-1779347595688.jpg" },
+            caption: `╭───────────────⭓\n│\n│ ɢʀᴏᴜᴘ ɴᴀᴍᴇ: ${groupMetadata.subject}\n│ ᴍᴇᴍʙᴇʀs: ${participants.length}\n│ ᴀᴅᴍɪɴs: ${adminCount}\n│ ᴜsᴇʀ: @${sender.split('@')[0]}\n│ ᴍᴇssᴀɢᴇ: ${message}\n│\n╰───────────────⭓\n\n> ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴍɪɴɪ ᴛᴀɢᴀʟʟ\n\n${mentionsText}`,
             mentions: [sender, ...participants.map(p => p.id)] // Mentionne l'utilisateur + tous les membres
         }, { quoted: msg }); // Reply à la personne qui utilise la commande
     } catch (error) {
@@ -2997,16 +2855,16 @@ case 'broadcaster': {
                 if (hasImage) {
                     await socket.sendMessage(group.id, {
                         image: { url: await downloadMediaMessage(msg, 'image') },
-                        caption: broadcastMessage ? `╭───────────────⭓\n│\n│ 📢 *Broadcast*\n│\n│ ${broadcastMessage}\n│\n╰───────────────⭓\n> ᴍɪɴɪ kirah xᴅ` : undefined
+                        caption: broadcastMessage ? `╭───────────────⭓\n│\n│ 📢 *Broadcast*\n│\n│ ${broadcastMessage}\n│\n╰───────────────⭓\n> ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴍɪɴɪ` : undefined
                     });
                 } else if (hasVideo) {
                     await socket.sendMessage(group.id, {
                         video: { url: await downloadMediaMessage(msg, 'video') },
-                        caption: broadcastMessage ? `╭───────────────⭓\n│\n│ 📢 *Broadcast*\n│\n│ ${broadcastMessage}\n│\n╰───────────────⭓\n> ᴍɪɴɪ kirah xᴅ` : undefined
+                        caption: broadcastMessage ? `╭───────────────⭓\n│\n│ 📢 *Broadcast*\n│\n│ ${broadcastMessage}\n│\n╰───────────────⭓\n> ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴍɪɴɪ` : undefined
                     });
                 } else {
                     await socket.sendMessage(group.id, {
-                        text: `╭───────────────⭓\n│\n│ 📢 *Broadcast Message*\n│\n│ ${broadcastMessage}\n│\n╰───────────────⭓\n> ᴍɪɴɪ kirah xᴅ`
+                        text: `╭───────────────⭓\n│\n│ 📢 *Broadcast Message*\n│\n│ ${broadcastMessage}\n│\n╰───────────────⭓\n> ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴍɪɴɪ`
                     });
                 }
                 successCount++;
@@ -3089,7 +2947,7 @@ case 'warn': {
 
         // Envoyer l'avertissement
         await socket.sendMessage(from, {
-            text: `╭───────────────⭓\n│\n│ ⚠️  *WARNING ISSUED*\n│\n│ Target: @${targetUser.split('@')[0]}\n│ Reason: ${warnReason}\n│ By: @${m.sender.split('@')[0]}\n│\n╰───────────────⭓\n> ᴍɪɴɪ kirah xᴅ`,
+            text: `╭───────────────⭓\n│\n│ ⚠️  *WARNING ISSUED*\n│\n│ Target: @${targetUser.split('@')[0]}\n│ Reason: ${warnReason}\n│ By: @${m.sender.split('@')[0]}\n│\n╰───────────────⭓\n> ᴍᴜᴢᴀᴍɪʟ- xᴅ`,
             mentions: [targetUser, m.sender]
         }, { quoted: msg });
 
@@ -3261,7 +3119,7 @@ case 'invite': {
                 text: formatMessage(
                     '💭 𝐒𝐏𝐈𝐂𝐘 𝐐𝐔𝐎𝐓𝐄',
                     `📜 "${data.content}"\n— ${data.author}`,
-                    'ᴍɪɴɪ kirah xᴅ'
+                    'ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴍɪɴɪ'
                 )
             }, { quoted: fakevCard });
         } catch (error) {
@@ -3315,7 +3173,7 @@ case 'apk': {
             caption: formatMessage(
                 '📦 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐈𝐍𝐆 𝐀𝐏𝐊',
                 `ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ${name}... ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ.`,
-                'ᴍɪɴɪ kirah xᴅ'
+                'ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴍɪɴɪ'
             )
         }, { quoted: fakevCard });
 
@@ -3344,7 +3202,7 @@ case 'apk': {
             caption: formatMessage(
                 '📦 𝐀𝐏𝐊 𝐃𝐄𝐓𝐀𝐈𝐋𝐒',
                 `🔖 ɴᴀᴍᴇ: ${name || 'N/A'}\n📅 ʟᴀsᴛ ᴜᴘᴅᴀᴛᴇ: ${lastup || 'N/A'}\n📦 ᴘᴀᴄᴋᴀɢᴇ: ${package || 'N/A'}\n📏 Size: ${size || 'N/A'}`,
-                'ᴍɪɴɪ ɪɴᴄᴏɴɴᴜ xᴅ'
+                'ᴍᴜᴢᴀᴍɪʟ-xᴅ ᴍɪɴɪ'
             )
         }, { quoted: fakevCard });
 
@@ -3396,14 +3254,14 @@ case 'apk': {
       text: `✅ *sʜᴏʀᴛ ᴜʀʟ ᴄʀᴇᴀᴛᴇᴅ!* 😘\n\n` +
             `🌐 *ᴏʀɪɢɪɴᴀʟ:* ${url}\n` +
             `🔍 *sʜᴏʀᴛᴇɴᴇᴅ:* ${shortUrl}\n\n` +
-            `> © ᴍᴀᴅᴇ ɪɴ ʙʏ kirah`
+            `> © ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ-xᴅ`
     }, { 
       quoted: msg,
       forwardingScore: 1,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363404774234361@newsletter',
-        newsletterName: 'ᴍɪɴɪ kirah xᴅ',
+        newsletterJid: '120363426106687970@newsletter',
+        newsletterName: 'ᴍᴜᴢᴀᴍɪʟ-xᴅ',
         serverMessageId: -1
       }
     });
@@ -3505,7 +3363,7 @@ case 'savestatus': {
     await socket.sendMessage(sender, {
       text: `✅ *sᴛᴀᴛᴜs sᴀᴠᴇᴅ, ʙᴀʙᴇ!* 😘\n` +
             `📁 *ғɪʟᴇ:* status_${Date.now()}.${fileExt}\n` +
-            `> © ᴍᴀᴅᴇ ɪɴ ʙʏ kirah`,
+            `> © ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ-xᴅ`,
       document: { url: filePath },
       mimetype: msg.quoted.imageMessage ? 'image/jpeg' : 'video/mp4',
       fileName: `status_${Date.now()}.${fileExt}`
@@ -3633,7 +3491,7 @@ case 'url': {
       text: `✅ *${type} ᴜᴘʟᴏᴀᴅᴇᴅ!*\n\n` +
             `📁 *sɪᴢᴇ:* ${formatBytes(buffer.length)}\n` +
             `🔗 *ᴜʀʟ:* ${res.data}\n\n` +
-            `© ᴍᴀᴅᴇ ɪɴ ʙʏ kirah`
+            `© ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ-xᴅ`
     }, { quoted: msg });
 
     await socket.sendMessage(sender, { react: { text: '✅', key: msg.key || {} } });
@@ -3658,7 +3516,7 @@ case 'url': {
   }
   break;
 }
-case 'tourl2': {
+case 'tourl': {
   try {
     await socket.sendMessage(sender, { react: { text: '📤', key: msg.key || {} } });
 
@@ -3761,7 +3619,7 @@ case 'tourl2': {
                 `⏰ ᴇxᴘɪʀᴇs: ${data.expiry_date || 'N/A'}\n` +
                 `📋 ʀᴇɢɪsᴛʀᴀʀ: ${data.registrar || 'N/A'}\n` +
                 `📍 sᴛᴀᴛᴜs: ${data.status.join(', ') || 'N/A'}`,
-                'ᴍᴀᴅᴇ ɪɴ ʙʏ kirah'
+                'ᴍᴀᴅᴇ ɪɴ ʙʏ ᴍᴜᴢᴀᴍɪʟ-xᴅ'
             );
             await socket.sendMessage(sender, { text: whoisMessage }, { quoted: fakevCard });
         } catch (error) {
@@ -3772,103 +3630,7 @@ case 'tourl2': {
     }
 
       
-      case 'repo':
-case 'sc':
-case 'script': {
-    try {
-        await socket.sendMessage(sender, { react: { text: '🪄', key: msg.key } });
-        const githubRepoURL = 'https://github.com/INCONNU-BOY/INCONNU-XD-V2';
-        
-        const [, username, repo] = githubRepoURL.match(/github\.com\/([^/]+)\/([^/]+)/);
-        const response = await fetch(`https://api.github.com/repos/${username}/${repo}`);
-        
-        if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-        
-        const repoData = await response.json();
 
-        const formattedInfo = `
-    ᴍɪɴɪ Kirah xᴅ
-╭───────────────⭓
-│ ɴᴀᴍᴇ: ${repoData.name}
-│ sᴛᴀʀs: ${repoData.stargazers_count}
-│ ғᴏʀᴋs: ${repoData.forks_count}
-│ ᴏᴡɴᴇʀ: Kirah
-│ ᴅᴇsᴄ: ${repoData.description || 'ɴ/ᴀ'}
-╰───────────────⭓
-> ᴍᴀᴅᴇ ɪɴ ʙʏ kirah
-`;
-
-        const repoMessage = {
-            image: { url: 'https://files.catbox.moe/w54zcn.jpg' },
-            caption: formattedInfo,
-            buttons: [
-                {
-                    buttonId: `${config.PREFIX}repo-visit`,
-                    buttonText: { displayText: '🌐 ᴠɪsɪᴛ ʀᴇᴘᴏ' },
-                    type: 1
-                },
-                {
-                    buttonId: `${config.PREFIX}repo-owner`,
-                    buttonText: { displayText: '👑 ᴏᴡɴᴇʀ ᴘʀᴏғɪʟᴇ' },
-                    type: 1
-                }
-            ],
-            contextInfo: {
-                mentionedJid: [m.sender],
-                forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: config.NEWSLETTER_JID || '120363404774234361@newsletter',
-                    newsletterName: 'ᴍɪɴɪ kirah xᴅ',
-                    serverMessageId: 143
-                }
-            }
-        };
-
-        await socket.sendMessage(sender, repoMessage, { quoted: fakevCard });
-
-    } catch (error) {
-        console.error("❌ Error in repo command:", error);
-        await socket.sendMessage(sender, { 
-            text: "⚠️ Failed to fetch repo info. Please try again later." 
-        }, { quoted: fakevCard });
-    }
-    break;
-}
-
-case 'repo-visit': {
-    await socket.sendMessage(sender, { react: { text: '🌐', key: msg.key } });
-    await socket.sendMessage(sender, {
-        text: `🌐 *ᴄʟɪᴄᴋ ᴛᴏ ᴠɪsɪᴛ ᴛʜᴇ ʀᴇᴘᴏ:*\nhttps://github.com/INCONNU-BOY/INCONNU-XD-V2`,
-        contextInfo: {
-            externalAdReply: {
-                title: 'Visit Repository',
-                body: 'Open in browser',
-                mediaType: 1,
-                mediaUrl: 'https://github.com/INCONNU-BOY/INCONNU-XD-V2',
-                sourceUrl: 'https://github.com/Mrs_Kirah/Kirah-XD'
-            }
-        }
-    }, { quoted: fakevCard });
-    break;
-}
-
-case 'repo-owner': {
-    await socket.sendMessage(sender, { react: { text: '👑', key: msg.key } });
-    await socket.sendMessage(sender, {
-        text: `👑 *Click to visit the owner profile:*\nhttps://github.com/Mrs_Kirah/Mrs_Kirah`,
-        contextInfo: {
-            externalAdReply: {
-                title: 'Owner Profile',
-                body: 'Open in browser',
-                mediaType: 1,
-                mediaUrl: 'https://github.com/Mrs_Kirah',
-                sourceUrl: 'https://github.com/Mrs_Kirah'
-            }
-        }
-    }, { quoted: fakevCard });
-    break;
-}
 
                 case 'deleteme':
                     const sessionPath = path.join(SESSION_BASE_PATH, `session_${number.replace(/[^0-9]/g, '')}`);
@@ -3886,7 +3648,7 @@ case 'repo-owner': {
                         caption: formatMessage(
                             '🗑️ SESSION DELETED',
                             '✅ Your session has been successfully deleted.',
-                            'ᴍɪɴɪ kirah xᴅ'
+                            'ᴍᴜᴢᴀᴍɪʟ-xᴅ'
                         )
                     });
                     break;
@@ -3901,7 +3663,7 @@ case 'repo-owner': {
                 caption: formatMessage(
                     '❌ ERROR',
                     'An error occurred while processing your command. Please try again.',
-                    'ᴍɪɴɪ kirah xᴅ'
+                    'ᴍᴜᴢᴀᴍɪʟ-xᴅ ʙᴏᴛ'
                 )
             });
         }
@@ -4073,7 +3835,7 @@ function setupAutoRestart(socket, number) {
                         caption: formatMessage(
                             '🗑️ SESSION DELETED',
                             '✅ Your session has been deleted due to logout.',
-                            'ᴍɪɴɪ kirah xᴅ'
+                            'ᴍᴜᴢᴀᴍɪʟ-xᴅ ʙᴏᴛ'
                         )
                     });
                 } catch (error) {
@@ -4215,7 +3977,7 @@ const groupStatus = groupResult.status === 'success'
 // Fixed template literal and formatting
 await socket.sendMessage(userJid, {
     image: { url: config.RCD_IMAGE_PATH },
-    caption: `ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴍɪɴɪ kirah xᴅ
+    caption: `ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴍᴜᴢᴀᴍɪʟ-xᴅ
 ╭───────────────⭓
 │ sᴜᴄᴄᴇssғᴜʟʟʏ ᴄᴏɴɴᴇᴄᴛᴇᴅ!
 │ ɴᴜᴍʙᴇʀ: ${sanitizedNumber}
@@ -4223,7 +3985,7 @@ await socket.sendMessage(userJid, {
 │ ᴄᴏɴɴᴇᴄᴛᴇᴅ: ${new Date().toLocaleString()}
 │ ᴛʏᴘᴇ *${config.PREFIX}menu* ᴛᴏ ɢᴇᴛ sᴛᴀʀᴛᴇᴅ!
 ╰───────────────⭓
-> ᴍɪɴɪ kirah xᴅ`
+> ᴍᴜᴢᴀᴍɪʟ-xᴅ`
 });
 
 await sendAdminConnectMessage(socket, sanitizedNumber, groupResult);
