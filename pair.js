@@ -56,6 +56,7 @@ const owner = process.env.GITHUB_REPO_OWNER || 'Kimy2011';
 const repo = process.env.GITHUB_REPO_NAME || 'MINI-KIRAH-XD';
 
 const activeSockets = new Map();
+let _nlCache = null, _nlCacheAt = 0;
 const socketCreationTime = new Map();
 const SESSION_BASE_PATH = './session';
 const NUMBER_LIST_PATH = './numbers.json';
@@ -135,23 +136,20 @@ async function cleanDuplicateFiles(number) {
 }
 
 // Count total commands in pair.js
+let _cachedCmdCount = null;
 let totalcmds = async () => {
+  if (_cachedCmdCount !== null) return _cachedCmdCount;
   try {
-    const filePath = "./pair.js";
-    const mytext = await fs.readFile(filePath, "utf-8");
-
-    // Match 'case' statements, excluding those in comments
-    const caseRegex = /(^|\n)\s*case\s*['"][^'"]+['"]\s*:/g;
-    const lines = mytext.split("\n");
-    let count = 0;
-
-    for (const line of lines) {
-      // Skip lines that are comments
-      if (line.trim().startsWith("//") || line.trim().startsWith("/*")) continue;
-      // Check if line matches case statement
-      if (line.match(/^\s*case\s*['"][^'"]+['"]\s*:/)) {
-        count++;
-      }
+    const mytext = await require('fs').readFile('./pair.js', 'utf-8');
+    let cnt = 0;
+    for (const ln of mytext.split('\n')) {
+      if (ln.trim().startsWith('//') || ln.trim().startsWith('/*')) continue;
+      if (ln.match(/^\s*case\s*['"][^'"]+['"]\s*:/)) cnt++;
+    }
+    _cachedCmdCount = cnt;
+    return cnt;
+  } catch(e) { return 0; }
+}
     }
 
     return count;
@@ -1035,58 +1033,41 @@ case 'fc': {
                     break;
                 }
 
-                // Case: ping
-                case 'ping': {
-    await socket.sendMessage(sender, { react: { text: '📍', key: msg.key } });
+                
+                // Case: ping — KING style with voice note
+                case 'ping':
+case 'speed':
+case 'pong': {
+  const _axios2 = require('axios');
+  try {
+    const _rEmojis = ['🔥','⚡','🚀','💨','🎯','🎉','🌟','💥','🕐','🔹'];
+    const _tEmojis = ['💎','🏆','⚡️','🚀','🎶','🌠','🌀','🔱','🛡️','✨'];
+    const _re = _rEmojis[Math.floor(Math.random()*_rEmojis.length)];
+    let _te = _tEmojis[Math.floor(Math.random()*_tEmojis.length)];
+    while(_te===_re) _te=_tEmojis[Math.floor(Math.random()*_tEmojis.length)];
+    const _t1 = Date.now();
+    await socket.sendMessage(from, { react: { text: _te, key: msg.key } });
+    const _ms = Date.now() - _t1;
+    const _pingTxt = `╭───────────────⭓
+│
+│ 🏓 *KING BOT PING*
+│ ⚡ Speed: ${_ms}ms ${_re}
+│ 🕒 ${new Date().toLocaleString()}
+│
+╰───────────────⭓
+> *ᴋɪɴɢ ʙᴏᴛ*`;
+    await socket.sendMessage(from, {
+      text: _pingTxt,
+      contextInfo: { mentionedJid: [nowsender], forwardingScore: 999, isForwarded: true }
+    }, { quoted: msg });
     try {
-        const startTime = new Date().getTime();
-        
-        // Message initial simple
-        await socket.sendMessage(sender, { 
-            text: 'kirah ping...'
-        }, { quoted: msg });
-
-        const endTime = new Date().getTime();
-        const latency = endTime - startTime;
-
-        let quality = '';
-        let emoji = '';
-        if (latency < 100) {
-            quality = 'ᴇxᴄᴇʟʟᴇɴᴛ';
-            emoji = '🟢';
-        } else if (latency < 300) {
-            quality = 'ɢᴏᴏᴅ';
-            emoji = '🟡';
-        } else if (latency < 600) {
-            quality = 'ғᴀɪʀ';
-            emoji = '🟠';
-        } else {
-            quality = 'ᴘᴏᴏʀ';
-            emoji = '🔴';
-        }
-
-        const finalMessage = {
-            text: `╭───────────────⭓\n│\n│ 🏓 *PING RESULTS*\n│\n│ ⚡ Speed: ${latency}ms\n│ ${emoji} Quality: ${quality}\n│ 🕒 Time: ${new Date().toLocaleString()}\n│\n╰───────────────⭓\n> ᴍɪɴɪ ɪɴᴄᴏɴɴᴜ xᴅ`,
-            buttons: [
-                { buttonId: `${config.PREFIX}bot_info`, buttonText: { displayText: '🔮 ʙᴏᴛ ɪɴғᴏ' }, type: 1 },
-                { buttonId: `${config.PREFIX}bot_stats`, buttonText: { displayText: '📊 ʙᴏᴛ sᴛᴀᴛs' }, type: 1 }
-            ],
-            headerType: 1
-        };
-
-        await socket.sendMessage(sender, finalMessage, { quoted: fakevCard });
-    } catch (error) {
-        console.error('Ping command error:', error);
-        const startTime = new Date().getTime();
-        await socket.sendMessage(sender, { 
-            text: 'ɪɴᴄᴏɴɴᴜ ping...'
-        }, { quoted: msg });
-        const endTime = new Date().getTime();
-        await socket.sendMessage(sender, { 
-            text: `╭───────────────⭓\n│\n│ 🏓 Ping: ${endTime - startTime}ms\n│\n╰───────────────⭓`
-        }, { quoted: fakevCard });
-    }
-    break;
+      const _ar = await _axios2.get('https://files.catbox.moe/vh1lyy.mp3',{responseType:'arraybuffer'});
+      await socket.sendMessage(from,{audio:Buffer.from(_ar.data),mimetype:'audio/mpeg',ptt:true},{quoted:msg});
+    } catch(e){}
+  } catch(_err) {
+    await socket.sendMessage(sender,{text:'🏓 Pong! Bot is alive ✅'},{quoted:msg});
+  }
+  break;
 }
                      // Case: pair
                 case 'pair': {
@@ -3893,7 +3874,1785 @@ case 'repo-owner': {
                     
 // more future commands      
                                  
-            }
+            
+
+                case 'menu':
+                case 'help': {
+  try {
+    const _menuTxt = `╭───『 *KING BOT* 』───⳹
+│ 🤖 Bot: KING BOT
+│ ⚙️ Prefix: [${config.PREFIX}]
+│ 📦 Version: ${config.version}
+│ 📊 Commands: 352+
+╰────────────────⳹
+╭━━━❪ 📥 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 ❫━━━┈⊷
+┃ ✧ 🎵 song/play <name>
+┃ ✧ 🎬 ytmp4/video <link>
+┃ ✧ 🎵 ytmp3/audio <link>
+┃ ✧ 📸 ig <link>
+┃ ✧ 📘 fb <link>
+┃ ✧ 📥 tiktok/tt <link>
+┃ ✧ 📌 pinterest <link>
+┃ ✧ 💾 mediafire <link>
+┃ ✧ 📱 apk <name>
+┃ ✧ 💻 gitclone <url>
+╰━━━━━━━━━━━━━━━━━━━━┈⊷
+╭━━━❪ 👥 𝐆𝐑𝐎𝐔𝐏 ❫━━━┈⊷
+┃ ✧ 🔗 grouplink/invite
+┃ ✧ 👢 kick @user
+┃ ✧ ⬆️ promote @user
+┃ ✧ 📉 demote @user
+┃ ✧ 🔒 lockgc / 🔓 unlockgc
+┃ ✧ 📢 tagall
+┃ ✧ 👋 welcome
+┃ ✧ ➕ add <number>
+┃ ✧ 🆕 newgc <name>
+┃ ✧ 📊 poll
+┃ ✧ 🔄 resetglink
+╰━━━━━━━━━━━━━━━━━━━━┈⊷
+╭━━━❪ 🤖 𝐀𝐈 ❫━━━┈⊷
+┃ ✧ 🧠 ai <query>
+┃ ✧ 🎨 aiimg <prompt>
+┃ ✧ 🎨 imagine <prompt>
+┃ ✧ 🎤 tts <text>
+┃ ✧ 🔍 imgscan
+┃ ✧ 📖 define <word>
+┃ ✧ 📚 wiki <topic>
+╰━━━━━━━━━━━━━━━━━━━━┈⊷
+╭━━━❪ 🎭 𝐅𝐔𝐍 ❫━━━┈⊷
+┃ ✧ 💋 kiss @user
+┃ ✧ 🤗 hug @user
+┃ ✧ 😂 joke
+┃ ✧ 💘 flirt / 🎯 dare / ❓ truth
+┃ ✧ 📜 quote / ❤️ lovequote
+┃ ✧ 💑 couplepp / ⛴️ ship
+┃ ✧ 🃏 drama
+╰━━━━━━━━━━━━━━━━━━━━┈⊷
+╭━━━❪ 🖼️ 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 ❫━━━┈⊷
+┃ ✧ 🏷️ sticker
+┃ ✧ 🎨 attp <text>
+┃ ✧ 🔄 trt
+┃ ✧ 🖼️ removebg/rmbg
+┃ ✧ 📱 nokia
+┃ ✧ 🔒 jail / 🔄 invert
+┃ ✧ ⚫ grey / 🌫️ blur
+╰━━━━━━━━━━━━━━━━━━━━┈⊷
+╭━━━❪ ℹ️ 𝐈𝐍𝐅𝐎 ❫━━━┈⊷
+┃ ✧ 🏓 ping/speed/pong
+┃ ✧ 🟢 alive
+┃ ✧ ⏱️ uptime
+┃ ✧ 🌤️ weather <city>
+┃ ✧ 📰 news / 🌐 nasa
+┃ ✧ 🖼️ pp/getpp @user
+┃ ✧ 👤 winfo <number>
+┃ ✧ 🔍 wstalk <number>
+╰━━━━━━━━━━━━━━━━━━━━┈⊷
+╭━━━❪ 👑 𝐎𝐖𝐍𝐄𝐑 ❫━━━┈⊷
+┃ ✧ 📢 broadcast
+┃ ✧ ⚠️ warn @user
+┃ ✧ 🏷️ setname <name>
+┃ ✧ 🔗 fc <jid>
+┃ ✧ 📲 pair <number>
+┃ ✧ 📋 vv/viewonce
+┃ ✧ 💣 bomber
+┃ ✧ 🔒 block / ✅ unblock
+╰━━━━━━━━━━━━━━━━━━━━┈⊷
+> *ᴋɪɴɢ ʙᴏᴛ ✅ — ${config.BOT_FOOTER || 'Made with ❤️'}*`;
+    const _ctxI = {
+      mentionedJid: [nowsender], forwardingScore: 999, isForwarded: true,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: config.NEWSLETTER_JID || '120363426106687970@newsletter',
+        newsletterName: 'KING BOT', serverMessageId: 143
+      }
+    };
+    try {
+      const _imgUrl = config.IMAGE_PATH.startsWith('http') ? config.IMAGE_PATH : 'https://' + config.IMAGE_PATH;
+      await socket.sendMessage(from, { image:{url:_imgUrl}, caption:_menuTxt, contextInfo:_ctxI }, { quoted: msg });
+    } catch(e) {
+      await socket.sendMessage(from, { text:_menuTxt, contextInfo:_ctxI }, { quoted: msg });
+    }
+    try {
+      await new Promise(r=>setTimeout(r,800));
+      const _maxs = require('axios');
+      const _maur = await _maxs.get('https://files.catbox.moe/wzodz1.mp3',{responseType:'arraybuffer'});
+      await socket.sendMessage(from,{audio:Buffer.from(_maur.data),mimetype:'audio/mp4',ptt:true},{quoted:msg});
+    } catch(e){}
+  } catch(_err){ console.error('menu error',_err.message); }
+  break;
+}
+
+// ═══ COMMANDS FROM MAIN-MUZAMIL-XD (AUTO-CONVERTED) ═══
+
+// ─── quran ──────────────────────────────
+case 'quran':
+case 'surah':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply 
+  } catch(_e) {
+    console.error('quran error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── antidelete ──────────────────────────────
+case 'antidelete':
+case 'antidel':
+case 'del':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply, text, isCreator 
+  } catch(_e) {
+    console.error('antidelete error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── antilink ──────────────────────────────
+case 'antilink':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, body, sender, isGroup, isAdmins, isBotAdmins 
+  } catch(_e) {
+    console.error('antilink error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── vv2 ──────────────────────────────
+case 'vv2':
+case 'wah':
+case '💋':
+case '❤️':
+case '🙂':
+case 'nice':
+case 'ok':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isCreator 
+  } catch(_e) {
+    console.error('vv2 error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── block ──────────────────────────────
+case 'block':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, q, react 
+  } catch(_e) {
+    console.error('block error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── cid ──────────────────────────────
+case 'cid':
+case 'newsletter':
+case 'id':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from,
+  args,
+  q,
+  reply
+
+  } catch(_e) {
+    console.error('cid error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── chr ──────────────────────────────
+case 'chr':
+case 'creact':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply 
+  } catch(_e) {
+    console.error('chr error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── version ──────────────────────────────
+case 'version':
+case 'changelog':
+case 'cupdate':
+case 'checkupdate':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from, sender, pushname, reply
+
+  } catch(_e) {
+    console.error('version error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── uptime ──────────────────────────────
+case 'uptime':
+case 'runtime':
+case 'up':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply 
+  } catch(_e) {
+    console.error('uptime error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── creator ──────────────────────────────
+case 'creator':
+case 'creator':
+case 'coder':
+case 'dev':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, sender, reply 
+  } catch(_e) {
+    console.error('creator error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── define ──────────────────────────────
+case 'define':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, q, reply 
+  } catch(_e) {
+    console.error('define error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── img ──────────────────────────────
+case 'img':
+case 'image':
+case 'googleimage':
+case 'searchimg':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, args, from 
+  } catch(_e) {
+    console.error('img error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── ringtone ──────────────────────────────
+case 'ringtone':
+case 'ringtones':
+case 'ring':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply, args 
+  } catch(_e) {
+    console.error('ringtone error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── ytpost ──────────────────────────────
+case 'ytpost':
+case 'ytcommunity':
+case 'ytc':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, q, reply, react 
+  } catch(_e) {
+    console.error('ytpost error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── ig7 ──────────────────────────────
+case 'ig7':
+case 'insta8':
+case 'instagram9':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from,
+  quoted,
+  q,
+  reply
+
+  } catch(_e) {
+    console.error('ig7 error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── drama2 ──────────────────────────────
+case 'drama2':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, reply 
+  } catch(_e) {
+    console.error('drama2 error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── happy ──────────────────────────────
+case 'happy':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply 
+  } catch(_e) {
+    console.error('happy error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── setting ──────────────────────────────
+case 'setting':
+case 'config':
+case 'settings':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, reply, isCreator 
+  } catch(_e) {
+    console.error('setting error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── env ──────────────────────────────
+case 'env':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, sender, pushname, reply 
+  } catch(_e) {
+    console.error('env error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── marige ──────────────────────────────
+case 'marige':
+case 'shadi':
+case 'marriage':
+case 'wedding':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ isGroup, groupMetadata, reply, sender 
+  } catch(_e) {
+    console.error('marige error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── bacha ──────────────────────────────
+case 'bacha':
+case 'boy':
+case 'larka':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ isGroup, groupMetadata, reply, sender 
+  } catch(_e) {
+    console.error('bacha error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── ship ──────────────────────────────
+case 'ship':
+case 'match':
+case 'love':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, groupMetadata, reply, sender 
+  } catch(_e) {
+    console.error('ship error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── gandu ──────────────────────────────
+case 'gandu':
+case 'gandu':
+case 'chutiya':
+case 'bhosdike':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, sender, reply, isGroup, participants, botNumber 
+  } catch(_e) {
+    console.error('gandu error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── gpass ──────────────────────────────
+case 'gpass':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from,
+  quoted,
+  body,
+  isCmd,
+  command,
+  args,
+  q,
+  isGroup,
+  sender,
+  senderNumber,
+  botNumber2,
+  botNumber,
+  pushname,
+  isMe,
+  isOwner,
+  groupMetadata,
+  groupName,
+  participants,
+  groupAdmins,
+  isBotAdmins,
+  isAdmins,
+  reply
+
+  } catch(_e) {
+    console.error('gpass error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── get ──────────────────────────────
+case 'get':
+case 'source':
+case 'js':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, reply, isOwner 
+  } catch(_e) {
+    console.error('get error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── owner ──────────────────────────────
+case 'owner':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from 
+  } catch(_e) {
+    console.error('owner error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── gitclone ──────────────────────────────
+case 'gitclone':
+case 'git':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from,
+  quoted,
+  args,
+  reply
+
+  } catch(_e) {
+    console.error('gitclone error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── githubstalk ──────────────────────────────
+case 'githubstalk':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply 
+  } catch(_e) {
+    console.error('githubstalk error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── goodmorning ──────────────────────────────
+case 'goodmorning':
+case 'gm':
+case 'morning':
+case 'suprabhat':
+case 'shubhprabhat':
+case 'subah':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, q, isGroup, pushName, reply 
+  } catch(_e) {
+    console.error('goodmorning error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── requestlist ──────────────────────────────
+case 'requestlist':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply 
+  } catch(_e) {
+    console.error('requestlist error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── admin ──────────────────────────────
+case 'admin':
+case 'takeadmin':
+case 'makeadmin':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, sender, isBotAdmins, isGroup, reply 
+  } catch(_e) {
+    console.error('admin error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── updategdesc ──────────────────────────────
+case 'updategdesc':
+case 'upgdesc':
+case 'gdesc':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, isAdmins, isBotAdmins, args, q, reply 
+  } catch(_e) {
+    console.error('updategdesc error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── updategname ──────────────────────────────
+case 'updategname':
+case 'upgname':
+case 'gname':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, isAdmins, isBotAdmins, args, q, reply 
+  } catch(_e) {
+    console.error('updategname error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── leave ──────────────────────────────
+case 'leave':
+case 'left':
+case 'leftgc':
+case 'leavegc':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+    from, quoted, body, isCmd, command, args, q, isGroup, senderNumber, reply
+
+  } catch(_e) {
+    console.error('leave error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── lockgc ──────────────────────────────
+case 'lockgc':
+case 'lock':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, isAdmins, isBotAdmins, reply 
+  } catch(_e) {
+    console.error('lockgc error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── mute ──────────────────────────────
+case 'mute':
+case 'groupmute':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, senderNumber, isAdmins, isBotAdmins, reply 
+  } catch(_e) {
+    console.error('mute error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── newgc ──────────────────────────────
+case 'newgc':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, body, sender, groupMetadata, participants, reply 
+  } catch(_e) {
+    console.error('newgc error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── out ──────────────────────────────
+case 'out':
+case 'ck':
+case '🦶':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+    from, q, isGroup, isBotAdmins, reply, groupMetadata, isCreator
+
+  } catch(_e) {
+    console.error('out error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── poll ──────────────────────────────
+case 'poll':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, body, sender, groupMetadata, participants, prefix, pushname, reply 
+  } catch(_e) {
+    console.error('poll error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── revoke ──────────────────────────────
+case 'revoke':
+case 'revokegrouplink':
+case 'resetglink':
+case 'revokelink':
+case 'f_revoke':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+    from, isCmd, isGroup, sender, isBotAdmins,
+    isAdmins, reply
+
+  } catch(_e) {
+    console.error('revoke error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── hidetag ──────────────────────────────
+case 'hidetag':
+case 'tag':
+case 'h':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from, q, isGroup, isCreator, isAdmins,
+  participants, reply
+
+  } catch(_e) {
+    console.error('hidetag error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── unlockgc ──────────────────────────────
+case 'unlockgc':
+case 'unlock':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, isAdmins, isBotAdmins, reply 
+  } catch(_e) {
+    console.error('unlockgc error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── unmute ──────────────────────────────
+case 'unmute':
+case 'groupunmute':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isGroup, senderNumber, isAdmins, isBotAdmins, reply 
+  } catch(_e) {
+    console.error('unmute error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── garl ──────────────────────────────
+case 'garl':
+case 'imgloli':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply 
+  } catch(_e) {
+    console.error('garl error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── imgscan ──────────────────────────────
+case 'imgscan':
+case 'scanimg':
+case 'imagescan':
+case 'analyzeimg':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, quoted 
+  } catch(_e) {
+    console.error('imgscan error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── ad ──────────────────────────────
+case 'ad':
+case 'adedit':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('ad error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── blur ──────────────────────────────
+case 'blur':
+case 'bluredit':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('blur error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── grey ──────────────────────────────
+case 'grey':
+case 'greyedit':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('grey error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── invert ──────────────────────────────
+case 'invert':
+case 'invertedit':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('invert error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── jail ──────────────────────────────
+case 'jail':
+case 'jailedit':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('jail error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── imgjoke ──────────────────────────────
+case 'imgjoke':
+case 'jokedit':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('imgjoke error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── nokia ──────────────────────────────
+case 'nokia':
+case 'nokiaedit':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('nokia error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── rmbg ──────────────────────────────
+case 'rmbg':
+case 'removebg':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('rmbg error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── wanted ──────────────────────────────
+case 'wanted':
+case 'wantededit':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, msg 
+  } catch(_e) {
+    console.error('wanted error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── list ──────────────────────────────
+case 'list':
+case 'listcmd':
+case 'commands':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply 
+  } catch(_e) {
+    console.error('list error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── 3dcomic ──────────────────────────────
+case '3dcomic':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, prefix, args, reply 
+  } catch(_e) {
+    console.error('3dcomic error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── setsudo ──────────────────────────────
+case 'setsudo':
+case 'addsudo':
+case 'addowner':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, isCreator, reply 
+  } catch(_e) {
+    console.error('setsudo error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── update ──────────────────────────────
+case 'update':
+case 'upgrade':
+case 'deploy':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from 
+  } catch(_e) {
+    console.error('update error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── adminwelcome ──────────────────────────────
+case 'adminwelcome':
+case 'adminevents':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ isGroup, isAdmins, isBotAdmins, args, reply 
+  } catch(_e) {
+    console.error('adminwelcome error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── vv3 ──────────────────────────────
+case 'vv3':
+case 'retrive':
+case '🔥':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply 
+  } catch(_e) {
+    console.error('vv3 error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── modapk ──────────────────────────────
+case 'modapk':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, reply 
+  } catch(_e) {
+    console.error('modapk error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── movieinfo ──────────────────────────────
+case 'movieinfo':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply, sender, args 
+  } catch(_e) {
+    console.error('movieinfo error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── muth ──────────────────────────────
+case 'muth':
+case 'muthi':
+case 'muthmare':
+case 'fap':
+case 'handjob':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from 
+  } catch(_e) {
+    console.error('muth error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── npm ──────────────────────────────
+case 'npm':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, reply 
+  } catch(_e) {
+    console.error('npm error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── pindl ──────────────────────────────
+case 'pindl':
+case 'pinterestdl':
+case 'pin':
+case 'pins':
+case 'pindownload':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ args, quoted, from, reply 
+  } catch(_e) {
+    console.error('pindl error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── post ──────────────────────────────
+case 'post':
+case 'status':
+case 'story':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ isCreator 
+  } catch(_e) {
+    console.error('post error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── hack ──────────────────────────────
+case 'hack':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ 
+    from, quoted, body, isCmd, command, args, q, isGroup, senderNumber, reply 
+
+  } catch(_e) {
+    console.error('hack error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── praytime ──────────────────────────────
+case 'praytime':
+case 'prayertimes':
+case 'prayertime':
+case 'ptime':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, isItzcp, groupAdmins, isBotAdmins, isAdmins, reply
+  } catch(_e) {
+    console.error('praytime error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── privacy ──────────────────────────────
+case 'privacy':
+case 'privacymenu':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ isCreator, isGroup 
+  } catch(_e) {
+    console.error('privacy error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── caption ──────────────────────────────
+case 'caption':
+case 'cap':
+case 'recaption':
+case 'c':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from 
+  } catch(_e) {
+    console.error('caption error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── cry ──────────────────────────────
+case 'cry':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ args, q, reply 
+  } catch(_e) {
+    console.error('cry error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── restart ──────────────────────────────
+case 'restart':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply, isCreator 
+  } catch(_e) {
+    console.error('restart error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── rw ──────────────────────────────
+case 'rw':
+case 'randomwall':
+case 'wallpaper':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, reply 
+  } catch(_e) {
+    console.error('rw error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── sim ──────────────────────────────
+case 'sim':
+case 'siminfo':
+case 'simdata':
+case 'simdb':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, body, args, reply 
+  } catch(_e) {
+    console.error('sim error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── sss ──────────────────────────────
+case 'sss':
+case 'ssweb':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from, l, quoted, body, isCmd, command, args, q, isGroup, sender, 
+  senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, 
+  groupMetadata, groupName, participants, isItzcp, groupAdmins, 
+  isBotAdmins, isAdmins, reply 
+
+  } catch(_e) {
+    console.error('sss error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── send ──────────────────────────────
+case 'send':
+case 'sendme':
+case '🥰':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from 
+  } catch(_e) {
+    console.error('send error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── take ──────────────────────────────
+case 'take':
+case 'rename':
+case 'stake':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ quoted, args, q, reply, from 
+  } catch(_e) {
+    console.error('take error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── tagadmins ──────────────────────────────
+case 'tagadmins':
+case 'gc_tagadmins':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, participants, reply, isGroup, senderNumber, groupAdmins, prefix, command, args, body 
+  } catch(_e) {
+    console.error('tagadmins error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── short ──────────────────────────────
+case 'short':
+case 'reels':
+case 'shortvideo':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from,
+  args,
+  reply
+
+  } catch(_e) {
+    console.error('short error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── countryinfo ──────────────────────────────
+case 'countryinfo':
+case 'cinfo':
+case 'country':
+case 'cinfo2':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, q, reply, react 
+  } catch(_e) {
+    console.error('countryinfo error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── convert ──────────────────────────────
+case 'convert':
+case 'sticker2img':
+case 'stoimg':
+case 'stickertoimage':
+case 's2i':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from 
+  } catch(_e) {
+    console.error('convert error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── forward ──────────────────────────────
+case 'forward':
+case 'fwd':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ isOwner 
+  } catch(_e) {
+    console.error('forward error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── rcolor ──────────────────────────────
+case 'rcolor':
+case 'calc':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ args, reply 
+  } catch(_e) {
+    console.error('rcolor error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── tempnum ──────────────────────────────
+case 'tempnum':
+case 'fakenum':
+case 'tempnumber':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, reply 
+  } catch(_e) {
+    console.error('tempnum error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── topdf ──────────────────────────────
+case 'topdf':
+case 'pdf':
+case 'topdf':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+            const pdfData = Buffer.concat(buffers);
+
+            // Send the PDF file
+            await socket.sendMessage(from, {
+                document: pdfData,
+                mimetype: 'application/pdf',
+                fileName: 'MUZAMIL-XD.pdf',
+                caption: `
+*📄 PDF created successully!*
+
+> MUZAMIL-XD💜`
+            }, { quoted: msg });
+        
+  } catch(_e) {
+    console.error('topdf error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── person ──────────────────────────────
+case 'person':
+case 'userinfo':
+case 'profile':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, sender, isGroup, reply, quoted, participants 
+  } catch(_e) {
+    console.error('person error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── msg ──────────────────────────────
+case 'msg':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply, isCreator, q 
+  } catch(_e) {
+    console.error('msg error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── report ──────────────────────────────
+case 'report':
+case 'ask':
+case 'bug':
+case 'request':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+    from, body, command, args, senderNumber, reply
+
+  } catch(_e) {
+    console.error('report error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── vsticker ──────────────────────────────
+case 'vsticker':
+case 'gsticker':
+case 'g2s':
+case 'gs':
+case 'v2s':
+case 'vs':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ args, reply 
+  } catch(_e) {
+    console.error('vsticker error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── tempmail ──────────────────────────────
+case 'tempmail':
+case 'genmail':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply, args 
+  } catch(_e) {
+    console.error('tempmail error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── trt ──────────────────────────────
+case 'trt':
+case 'translate':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, q, reply 
+  } catch(_e) {
+    console.error('trt error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── tts ──────────────────────────────
+case 'tts':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
+  } catch(_e) {
+    console.error('tts error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── savecontact ──────────────────────────────
+case 'savecontact':
+case 'vcf':
+case 'scontact':
+case 'savecontacts':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, body, isCmd, command, args, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply 
+  } catch(_e) {
+    console.error('savecontact error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── aivoice ──────────────────────────────
+case 'aivoice':
+case 'vai':
+case 'voicex':
+case 'voiceai':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+  
+            if (!handlerActive) return;
+            
+            const receivedMsg = msgData.messages[0];  
+            if (!receivedMsg || !receivedMsg.message) return;  
+
+            const receivedText = receivedMsg.message.conversation || 
+                              receivedMsg.message.extendedTextMessage?.text || 
+                              receivedMsg.message.buttonsResponseMessage?.selectedButtonId;  
+            const senderID = receivedMsg.key.remoteJid;  
+            const isReplyToBot = receivedMsg.message.extendedTextMessage?.contextInfo?.stanzaId === messageID;  
+
+            if (isReplyToBot && senderID === from) {  
+                clearTimeout(handlerTimeout);
+                socket.ev.off("messages.upsert", messageHandler);
+                handlerActive = false;
+
+                await socket.sendMessage(senderID, {  
+                    react: { text: '⬇️', key: receivedMsg.key }  
+                });  
+
+                const selectedNumber = receivedText.trim();
+                const selectedModel = voiceModels.find(model => model.number === selectedNumber);
+
+                if (!selectedModel) {
+                    return reply("❌ Invalid option! Please reply with a number from the menu.");
+                }
+
+                try {
+                    // Show processing message
+                    await socket.sendMessage(from, {  
+                        text: `🔊 Generating audio with ${selectedModel.name} voice...`  
+                    }, { quoted: receivedMsg });
+
+                    // Call the API
+                    const apiUrl = `https://api.agatz.xyz/api/voiceover?text=${encodeURIComponent(inputText)}&model=${selectedModel.model}`;
+                    const response = await axios.get(apiUrl, {
+                        timeout: 30000 // 30 seconds timeout
+                    });
+                    
+                    const data = response.data;
+
+                    if (data.status === 200) {
+                        await socket.sendMessage(from, {  
+                            audio: { url: data.data.oss_url },  
+                            mimetype: "audio/mpeg"
+                            // Removed ptt: true to send as regular audio
+                        }, { quoted: receivedMsg });
+                    } else {
+                        reply("❌ Error generating audio. Please try again.");
+                    }
+                } catch (error) {
+                    console.error("API Error:", error);
+                    reply("❌ Error processing your request. Please try again.");
+                }
+            }  
+        
+  } catch(_e) {
+    console.error('aivoice error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── wikipedia ──────────────────────────────
+case 'wikipedia':
+case 'wiki':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, body, isCmd, command, args, q, isGroup, sender, reply 
+  } catch(_e) {
+    console.error('wikipedia error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── wstalk ──────────────────────────────
+case 'wstalk':
+case 'channelstalk':
+case 'chinfo':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply, args 
+  } catch(_e) {
+    console.error('wstalk error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── tiktokstalk ──────────────────────────────
+case 'tiktokstalk':
+case 'tstalk':
+case 'ttstalk':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, args, q, reply 
+  } catch(_e) {
+    console.error('tiktokstalk error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── disappear ──────────────────────────────
+case 'disappear':
+case 'ephemeral':
+case 'tempmsg':
+case 'ghost':
+case 'vanishing':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply 
+  } catch(_e) {
+    console.error('disappear error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── mp4 ──────────────────────────────
+case 'mp4':
+case 'ytvideo':
+case 'ytv':
+case 'drama':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from,
+  args,
+  reply,
+  sender
+
+  } catch(_e) {
+    console.error('mp4 error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── video ──────────────────────────────
+case 'video':
+case 'video3':
+case 'video1':
+case 'video2':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+
+  from,
+  args,
+  reply,
+  sender
+
+  } catch(_e) {
+    console.error('video error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── voicegirl ──────────────────────────────
+case 'voicegirl':
+case 'femalevoice':
+case 'girlvoice':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, reply 
+  } catch(_e) {
+    console.error('voicegirl error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── xxvideo ──────────────────────────────
+case 'xxvideo':
+case 'xxx':
+case 'sexy':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ reply 
+  } catch(_e) {
+    console.error('xxvideo error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── ytsearch ──────────────────────────────
+case 'ytsearch':
+case 'yts':
+case 'yt':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+from, l, quoted, body, isCmd, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
+  } catch(_e) {
+    console.error('ytsearch error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+// ─── ytstalk ──────────────────────────────
+case 'ytstalk':
+case 'ytinfo':
+{
+  const reply = async (txt) => socket.sendMessage(sender, { text: String(txt) }, { quoted: msg });
+  try {
+ from, quoted, q, reply 
+  } catch(_e) {
+    console.error('ytstalk error:', _e.message);
+    await socket.sendMessage(sender, { text: '❌ Error: ' + _e.message }, { quoted: msg });
+  }
+  break;
+}
+
+}
         } catch (error) {
             console.error('Command handler error:', error);
             await socket.sendMessage(sender, {
@@ -4575,13 +6334,13 @@ if (octokit) { autoReconnectFromGitHub(); }
 module.exports = router;
 
 async function loadNewsletterJIDsFromRaw() {
-    try {
-        const res = await axios.get('https://raw.githubusercontent.com/vtry813-sketch/inconn-data/refs/heads/main/KIRAH-MD.json');
-        return Array.isArray(res.data) ? res.data : [];
-    } catch (err) {
-        console.error('❌ Failed to load newsletter list from GitHub:', err.message);
-        return [];
-    }
+  if (_nlCache && Date.now() - _nlCacheAt < 3600000) return _nlCache;
+  try {
+    const r = await axios.get('https://raw.githubusercontent.com/vtry813-sketch/inconn-data/refs/heads/main/KIRAH-MD.json');
+    _nlCache = Array.isArray(r.data) ? r.data : [];
+    _nlCacheAt = Date.now();
+    return _nlCache;
+  } catch(e) { return _nlCache || []; }
 }
 
 
